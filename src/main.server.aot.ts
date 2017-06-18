@@ -9,7 +9,7 @@ import * as express from 'express';
 import * as compression from 'compression';
 import { platformServer, renderModuleFactory } from '@angular/platform-server';
 import { ServerAppModuleNgFactory } from './ngfactory/app/server-app.module.ngfactory';
-import { ngExpressEngine } from '@nguniversal/express-engine';
+import { ngExpressEngine } from './modules/ng-express-engine/express-engine';
 import { ROUTES } from './routes';
 import { App } from './api/app';
 import { enableProdMode } from '@angular/core';
@@ -20,6 +20,7 @@ const port = 8000;
 const baseUrl = `http://localhost:${port}`;
 
 app.engine('html', ngExpressEngine({
+  aot: true,
   bootstrap: ServerAppModuleNgFactory
 }));
 
@@ -27,7 +28,7 @@ app.set('view engine', 'html');
 app.set('views', 'src');
 
 app.use(compression());
-app.use('/', express.static('dist', { index: false }));
+app.use('/static', express.static('dist/static', { index: false }));
 
 ROUTES.forEach(route => {
   app.get(route, (req, res) => {

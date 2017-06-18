@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs/Rx';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 import { Article } from '../../models/Article';
 
@@ -34,6 +34,7 @@ export class BlogComponent implements OnInit {
   private pageSubs : Subscription
   private countSubs : Subscription
   private searchSubs : Subscription
+  private querySubs : Subscription
   private limit : number = 9
 
   constructor(private http:TransferHttp, private shared:SharedService, private route: ActivatedRoute, private router: Router, private title: Title) {}
@@ -50,10 +51,12 @@ export class BlogComponent implements OnInit {
                               this.isLoading = true
                               if(this.pageSubs)
                                 this.pageSubs.unsubscribe()
+
                               this.getTotalPage(value, this.category).then(count=>count.num/this.limit).then(count=>{
                                 this.totalPages = count
                                 this.paginator = this.setPaginator(this.page || 1, count)
                               })
+
                               return this.getPage(this.page,this.category,value).then(data=>{
                                 return data
                               })
@@ -63,7 +66,7 @@ export class BlogComponent implements OnInit {
                             this.Articles = data
                           })
 
-    this.route.queryParams.subscribe(queryParam=>{
+    this.querySubs = this.route.queryParams.subscribe(queryParam=>{
       if(!queryParam.page){
         this.router.navigate(['blog'], { queryParams: { page : 1}})
       }else{   
@@ -75,16 +78,18 @@ export class BlogComponent implements OnInit {
         if(this.pageSubs)
           this.pageSubs.unsubscribe()
 
-        this.getTotalPage().then(count=>count.num/this.limit).then(count=>{
+        this.getTotalPage('',this.category).then(count=>count.num/this.limit).then(count=>{
           this.totalPages = count
-          this.paginator = this.setPaginator(Number(queryParam.page) || 1, count)
-          if(queryParam.page > Math.round(count))
+          this.paginator = this.setPaginator(this.page, count)
+          if(this.page > Math.ceil(count))
               this.router.navigate(['blog'], { queryParams: { page : 1}})
         })
-        this.getPage(Number(queryParam.page), queryParam.category).then(data=>{
+
+        this.getPage(this.page, this.category, '').then(data=>{
           this.Articles = data
           this.isLoading = false
         })
+
       }
     })
   }
@@ -120,7 +125,7 @@ export class BlogComponent implements OnInit {
     })
   }
 
-  getPage(page: number = 1, category? : string, search? : string) : Promise<Article[]>{
+  getPage(page: number = 1, category? : string , search? : string) : Promise<Article[]>{
     return new Promise((resolve,reject)=>{
     this.pageSubs = this.http.get('https://maxangeiei.herokuapp.com/api/v1/blogs?sort=-$natural&limit='+this.limit+'&offset='+((page-1)*this.limit)+'&search='+search+'&category='+category)
       .subscribe((data:Article[])=>{
@@ -146,5 +151,7 @@ export class BlogComponent implements OnInit {
       this.countSubs.unsubscribe()
     if(this.searchSubs)
       this.searchSubs.unsubscribe()
+    if(this.querySubs)
+      this.querySubs.unsubscribe()
   }
 }

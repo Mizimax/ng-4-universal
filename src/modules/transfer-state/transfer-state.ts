@@ -10,6 +10,14 @@ export class TransferState {
     return this._map.keys();
   }
 
+  clear(){
+    this._map.clear();
+  }
+
+  delete(key: string){
+    this._map.delete(key);
+  }
+
   get(key: string): any {
     return this._map.get(key);
   }

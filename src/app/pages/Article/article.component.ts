@@ -1,4 +1,3 @@
-import { createChangeDetectorRef } from '@angular/core/src/view/refs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -47,16 +46,16 @@ export class ArticleComponent implements OnInit {
                 })
             this.commentSubs = this.http.get('https://maxangeiei.herokuapp.com/api/v1/blog/'+param.name+'/comments')
                 .subscribe((data:any)=>{
-                    this.comments = data[0].comments
+                    this.comments = data
                 })
         })
     }
 
     addComment(form): void{
+        console.log(this.captchaResponse)
         this.addCommentSubs = this.http.post('https://maxangeiei.herokuapp.com/api/v1/blog/'+this.article.name+'/comments'
                                         , {comment: form.commentText, created_by: this.auth.getLastUser().name, captcha: this.captchaResponse})
                                        .subscribe(data=>{
-                                            console.log(data)
                                             this.comments.push({
                                                 comment: form.commentText,
                                                 created_by: this.auth.getLastUser().name,
@@ -72,8 +71,10 @@ export class ArticleComponent implements OnInit {
         script.src = 'https://www.google.com/recaptcha/api.js';
         script.async = true;
         script.defer = true;
-        document.head.appendChild(script);
+        if(document.head.lastChild != script)
+            document.head.appendChild(script);
     }
+
 
     verifyCallback(response){
         this.captchaResponse = response

@@ -14,7 +14,7 @@
     "clean": "rimraf dist",
     "server": "nodemon dist/server/server.js",
     "dev": "npm run purifycss & webpack --watch",
-    "purifycss": "purifycss ./src/css/*.css ./src/app/**/*.html -o ./dist/static/style.css -m"
+    "purifycss": "purifycss ./src/css/font-awesome.min.css ./src/app/**/*.html -o ./dist/static/style.css -m"
   },
   "engines": {
     "node": ">=6.0.0"

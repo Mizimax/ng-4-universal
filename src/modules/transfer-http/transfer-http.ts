@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ConnectionBackend, Http, Request, RequestOptions, RequestOptionsArgs, Response } from '@angular/http';
+import { Http, Request, RequestOptions, RequestOptionsArgs, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 import { TransferState } from '../transfer-state/transfer-state';
 
 import 'rxjs/add/operator/map';
@@ -12,9 +11,17 @@ import 'rxjs/add/observable/fromPromise';
 export class TransferHttp {
   constructor(private http: Http, protected transferState: TransferState) {}
 
+  clearCache(){
+    this.transferState.clear();
+  }
+
+  deleteCache(key: string){
+    this.transferState.delete(key);
+  }
+
   request(uri: string | Request, options?: RequestOptionsArgs): Observable<any> {
     return this.getData(uri, options, (url: string, options: RequestOptionsArgs) => {
-      return this.http.request(url, options);
+      return this.http.request(url, options)
     });
   }
   /**
@@ -22,7 +29,7 @@ export class TransferHttp {
    */
   get(url: string, options?: RequestOptionsArgs): Observable<any> {
     return this.getData(url, options, (url: string, options: RequestOptionsArgs) => {
-      return this.http.get(url, options);
+      return this.http.get(url, options)
     });
   }
   /**
@@ -30,7 +37,7 @@ export class TransferHttp {
    */
   post(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
     return this.getPostData(url, body, options, (url: string, options: RequestOptionsArgs) => {
-      return this.http.post(url, body. options);
+      return this.http.post(url, body, options)
     });
   }
   /**
@@ -38,7 +45,7 @@ export class TransferHttp {
    */
   put(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
     return this.getData(url, options, (url: string, options: RequestOptionsArgs) => {
-      return this.http.put(url, options);
+      return this.http.put(url, options)
     });
   }
   /**
@@ -46,7 +53,7 @@ export class TransferHttp {
    */
   delete(url: string, options?: RequestOptionsArgs): Observable<any> {
     return this.getData(url, options, (url: string, options: RequestOptionsArgs) => {
-      return this.http.delete(url, options);
+      return this.http.delete(url, options)
     });
   }
   /**
@@ -54,7 +61,7 @@ export class TransferHttp {
    */
   patch(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
     return this.getPostData(url, body, options, (url: string, options: RequestOptionsArgs) => {
-      return this.http.patch(url, body.options);
+      return this.http.patch(url, body.options)
     });
   }
   /**
@@ -62,7 +69,7 @@ export class TransferHttp {
    */
   head(url: string, options?: RequestOptionsArgs): Observable<any> {
     return this.getData(url, options, (url: string, options: RequestOptionsArgs) => {
-      return this.http.head(url, options);
+      return this.http.head(url, options)
     });
   }
   /**
@@ -70,7 +77,7 @@ export class TransferHttp {
    */
   options(url: string, options?: RequestOptionsArgs): Observable<any> {
     return this.getData(url, options, (url: string, options: RequestOptionsArgs) => {
-      return this.http.options(url, options);
+      return this.http.options(url, options)
     });
   }
 
@@ -81,12 +88,9 @@ export class TransferHttp {
     if (typeof uri !== 'string') {
       url = uri.url
     }
-
     const key = url + JSON.stringify(options)
-
     try {
       return this.resolveData(key);
-
     } catch (e) {
       return callback(uri, options)
         .map(res => res.json())
@@ -114,14 +118,13 @@ export class TransferHttp {
       return callback(uri, body, options)
         .map(res => res.json())
         .do(data => {
-          this.setCache(key, data);
+          this.setCache(key, data)
         });
     }
   }
 
   private resolveData(key: string) {
     const data = this.getFromCache(key);
-
     if (!data) {
       throw new Error();
     }
