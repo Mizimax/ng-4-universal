@@ -1,0 +1,12 @@
+.articles{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+.article{
+    width:290px;
+    margin:15px;
+    cursor:pointer;
+}

@@ -1,0 +1,27 @@
+body{
+  background: #FCFCFC;
+}
+a{
+  color: #888;
+}
+.section{
+  visibility: visible;
+  opacity: 1;
+  background: #FCFCFC;
+  transform: translateY(0px);
+  transition: all .5s ease;
+}
+.section.hidden{
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-20px)
+}
+.myContainer{
+  width:85%; 
+  margin:0 auto;
+}
+@media (max-width: 450px){
+  .myContainer{
+    width:100%;
+  }
+}

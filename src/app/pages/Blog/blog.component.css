@@ -1,0 +1,31 @@
+.articles{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+.article{
+    cursor: pointer;
+    width:280px;
+    margin:18px;
+    transition: transform .1s ease;
+}
+.article:hover{
+    transform: translateY(-2px)
+}
+.pagination-link:hover, .pagination-link:focus{
+    border-color:orange;
+}
+.pagination-link.is-current{
+    background: orange;
+    border-color:orange;
+}
+.category{
+    text-align: right;
+}
+@media (max-width: 768px){
+    .category{
+        text-align:center;
+    }
+}

@@ -1,0 +1,52 @@
+<div class="section">
+    <div class="container">
+        <div class="myContainer">
+        <div class="last-article" style="margin-top:50px">
+            <h3 class="title is-3">Latest Articles</h3>
+            <hr>
+            <loading [height]="300" *ngIf="isLoading"></loading>
+            <div class="articles" *ngIf="!isLoading">
+                <div class="article" *ngFor="let article of lastArticles" [routerLink]="['blog',article.name]">
+                   <a [routerLink]="['/blog/'+article.name]">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-4by3">
+                                <img [src]="'static/'+article.pic" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="card-content" style="padding:1em">
+                                <div class="content">
+                                    <h2 class="title is-5">{{ article.topic }}</h2>
+                                </div>
+                                <div class="media">
+                                <div class="media-left">
+                                    <figure class="image is-48x48">
+                                    <img style="border-radius: 50%" src="static/imgs/user/{{ article.created_by }}.jpg" alt="Image">
+                                    </figure>
+                                </div>
+                                <div class="media-content" >
+                                    <p style="font-weight:400;padding-bottom:3px;">{{ article.created_by }}</p>
+                                    <p class="subtitle" style="font-size:12px">{{ article.created_at | date:'medium' }}</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-two-thirds">
+                <div class="todo box">
+
+                </div>
+            </div>
+            <div class="column">
+                <div class="chat box">
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

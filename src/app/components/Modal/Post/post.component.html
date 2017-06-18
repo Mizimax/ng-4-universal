@@ -1,0 +1,6 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+    <input class="input" type="text" placeholder="Your topic short name..." name="name" ngModel>
+    <input class="input" type="text" placeholder="Your topic..." name="topic" ngModel>
+    <textarea name="content" cols="30" rows="10" ngModel></textarea>
+    <button class="button is-info" type="submit" [ngClass]="{'is-loading': isLoading}" (click)="isLoading=true">Post</button>
+</form>

@@ -1,0 +1,73 @@
+<div class="section">
+    <div class="container">
+        <div class="myContainer">
+            <div class="allArticle" style="margin-top:50px">
+                <div class="columns">
+                    <div class="column is-one-quarter">
+                        <h3 class="title is-3">Articles</h3>
+                    </div>
+                    <div class="column category" style="margin-top:8px;">
+                        <a class="button is-warning" [ngClass]="{'is-outlined': activeCategory('all')}" [routerLink]="['/blog']" [queryParams]="{page: 1}">All</a>
+                        <a class="button is-info" [ngClass]="{'is-outlined': activeCategory('web')}"  [routerLink]="['/blog']" [queryParams]="{category: 'web', page: 1}">Web</a>
+                        <a class="button is-danger" [ngClass]="{'is-outlined': activeCategory('mobile')}" [routerLink]="['/blog']" [queryParams]="{category: 'mobile', page: 1}">Mobile</a>
+                        <a class="button is-primary" [ngClass]="{'is-outlined': activeCategory('tech')}" [routerLink]="['/blog']" [queryParams]="{category: 'tech', page: 1}">Technology</a>
+                    </div>
+                    <div class="column" style="margin-top:8px;" align="center">
+                        <div class="field has-addons" style="justify-content:center;">
+                        <p class="control">
+                            <input  class="input" type="text" placeholder="Find a article" [value]="searchWord" [formControl]="searchCtrl">
+                        </p>
+                        <p class="control">
+                            <a class="button is-info">
+                            Search
+                            </a>
+                        </p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <loading [height]="400" *ngIf="isLoading"></loading>
+                <div *ngIf="!isLoading">
+                <div class="articles">
+                    <div class="article" *ngFor="let article of Articles">
+                        <a [routerLink]="['/blog/'+article.name]">
+                            <div class="card">
+                                <div class="card-image">
+                                    <figure class="image is-4by3">
+                                    <img [src]="'static/'+article.pic" alt="Image">
+                                    </figure>
+                                </div>
+                                <div class="card-content" style="padding:1em">
+                                    <div class="content">
+                                        <h2 class="title is-5">{{ article.topic }}</h2>
+                                    </div>
+                                    <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-48x48">
+                                        <img style="border-radius: 50%" src="static/imgs/user/{{ article.created_by }}.jpg" alt="Image">
+                                        </figure>
+                                    </div>
+                                    <div class="media-content" >
+                                        <p style="font-weight:400;padding-bottom:3px;">{{ article.created_by }}</p>
+                                        <p class="subtitle" style="font-size:12px">{{ article.created_at | date:'medium' }}</p>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <nav class="pagination"> 
+                    <ul class="pagination-list" style="justify-content:center">
+                        <li *ngFor="let page of paginator" >
+                            <a class="pagination-link" [routerLink]="['/blog']" [queryParams]="{page: page.txt!=='...'? page: page.value}" routerLinkActive="is-current">{{ page.txt!=='...'? page: page.txt }}</a>
+                        </li>
+                    </ul>
+                </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.loading{
+    position:absolute;
+    left:50%;
+    top:45%;
+    transform: translate(-50%,-50%);
+}
+.loader{
+    height: 2em !important;
+    width: 2em !important;
+    border: 2px solid orangered !important;
+    border-right-color: transparent !important;
+    border-top-color: transparent !important;
+}
