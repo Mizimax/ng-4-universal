@@ -52,7 +52,6 @@ export class ArticleComponent implements OnInit {
     }
 
     addComment(form): void{
-        console.log(this.captchaResponse)
         this.addCommentSubs = this.http.post('https://maxangeiei.herokuapp.com/api/v1/blog/'+this.article.name+'/comments'
                                         , {comment: form.commentText, created_by: this.auth.getLastUser().name, captcha: this.captchaResponse})
                                        .subscribe(data=>{
@@ -67,12 +66,12 @@ export class ArticleComponent implements OnInit {
     }
 
     render(){
-        var script = document.createElement('script');
+        let doc = <HTMLDivElement>document.getElementById('submit');
+        let script = document.createElement('script');
         script.src = 'https://www.google.com/recaptcha/api.js';
         script.async = true;
         script.defer = true;
-        if(document.head.lastChild != script)
-            document.head.appendChild(script);
+        doc.appendChild(script);
     }
 
 
@@ -81,9 +80,10 @@ export class ArticleComponent implements OnInit {
     }
 
     ngOnDestroy() {
-        if(this.paramSubs)
-            this.paramSubs.unsubscribe()
-        if(this.articleSubs)
-            this.articleSubs.unsubscribe()
+        this.paramSubs.unsubscribe()
+        this.articleSubs.unsubscribe()
+        this.commentSubs.unsubscribe()
+        if(this.addCommentSubs)
+            this.addCommentSubs.unsubscribe()
     }
 }

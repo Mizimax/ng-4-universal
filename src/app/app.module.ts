@@ -4,7 +4,6 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module';
-import { Title } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/Header/header.component';
@@ -39,7 +38,7 @@ import { AuthService } from './services/auth.service';
     ])
 	],
 	declarations: [ AppComponent, HeaderComponent, LoadingComponent, HomeView, AboutView, ModalComponent, ProjectComponent, BlogComponent, ContactComponent, LoginComponent, PostComponent, ArticleComponent ],
-  providers: [ AuthService, SharedService, Title ],
+  providers: [ AuthService, SharedService ],
   exports: [ AppComponent ]
 })
 export class AppModule {}
