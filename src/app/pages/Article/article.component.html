@@ -1,54 +1,27 @@
 <div class="section">
     <div class="container">
-        <div class="myContainer">
-            <loading [height]="400" *ngIf="isLoading"></loading>
-            <div class="myArticle" style="margin-top:50px" *ngIf="!isLoading">
-                <h1 class="title is-3">{{article.topic}}</h1>
-                <hr>
-                <div class="content">
-                    <figure class="image">
-                        <img style="height:50vh" src="static/{{article.pic}}" alt="{{ article.topic }}">
-                    </figure>
-                    <br>
-                    <h2 class="title is-4" align="center">Subtitle</h2>
-                    <div class="content is-6" style="padding:20px">
-                        <span class="tab"></span>{{ article.content }}
-                    </div>
-                </div>
-                <div class="comment" *ngFor="let comment of comments; let i = index">
-                    <div class="card">
-                        <div class="card-content" style="padding:1em">
-                            <div class="commentId">ความคิดเห็นที่ {{ i+1 }}</div>
-                            <div class="content">
-                                <p style="font-size:16px;">{{ comment.comment }}</p>
-                            </div>
-                            <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-40x40">
-                                <img style="border-radius: 50%" src="static/imgs/user/{{ comment.created_by }}.jpg" alt="Image">
-                                </figure>
-                            </div>
-                            <div class="media-content" >
-                                <p style="font-weight:400;padding-bottom:3px;font-size:14px">{{ comment.created_by }}</p>
-                                <p class="subtitle" style="font-size:12px">{{ comment.created_at | date:'medium' }}</p>
-                            </div>
-                            </div>
+    <loading [height]="400" *ngIf="isLoading"></loading>
+        <div class="myContainer" *ngIf="!isLoading">
+            <div class="columns">
+                <div class="column is-three-quarters" style="margin-top:50px">
+                    <h1 class="title is-3">{{article.topic}}</h1>
+                    <hr>
+                    <div class="content">
+                        <figure class="image">
+                            <img style="height:50vh" src="static/{{article.pic}}" alt="{{ article.topic }}">
+                        </figure>
+                        <br>
+                        <h2 class="title is-4" align="center">Subtitle</h2>
+                        <div class="content is-6" style="padding:20px">
+                            <span class="tab"></span>{{ article.content }}
                         </div>
                     </div>
                 </div>
-                <form #form="ngForm" (ngSubmit)="addComment(form.value)">
-                <div class="field">
-                    <label class="label">Message</label>
-                    <p class="control">
-                        <textarea class="textarea" placeholder="แสดงความคิดเห็น" name="commentText" ngModel required></textarea>
-                    </p>
+                <div id="sidenav" class="column" style="margin-top:50px">
+                    <max-side-article></max-side-article>
                 </div>
-                <div style="height:74px">
-                    <button class="button is-primary" type="submit" style="float:left; margin-top:19px;">Comment</button>
-                    <div class="g-recaptcha" data-sitekey="6LfxASUUAAAAAAcl1piDOzqbOvzYEVSviWSGGl1q" data-callback="verifyCallback" style="float:left; margin-left:40px"></div>
-                </div>
-                </form>
             </div>
+            <max-comment [topic]="article.name"></max-comment>
         </div>
     </div>
 </div>

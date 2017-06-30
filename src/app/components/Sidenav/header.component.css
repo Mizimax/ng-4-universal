@@ -1,0 +1,63 @@
+/* 3F51B5 indigo */
+a{
+    color:#aaa;
+}
+.nav{
+    background-color: white;
+    position: fixed;
+    width: 100%;
+}
+.nav-item{
+    padding-left:20px !important;
+    padding-right: 20px !important;
+}
+.nav-item:hover{
+    color:#555;
+}
+.is-tab{
+    padding-left:40px !important;
+    padding-right: 40px !important;  
+}
+.is-tab:hover{
+    border-bottom-color: orange !important;
+}
+.nav-center>.is-active{
+    border-bottom-color: orange;
+    color: black;
+}
+.toggle-active{
+    background-color:#ddd;
+}
+.toggle-span-active{
+    background-color:black !important;
+}
+.nav-toggle>span{
+    background-color:#555;
+}
+.nav-toggle:hover > span{
+    background-color:black !important;
+}
+.nav-toggle:hover{
+    background-color:#ddd;
+}
+.fa-user-o:hover{
+    color:white !important;
+}
+.loader{
+    margin-top:3px;
+    border: 2px solid white !important;
+    border-right-color: transparent !important;
+    border-top-color: transparent !important;
+}
+@media(max-width: 940px){
+    .is-tab{
+        padding-left:32px !important;
+        padding-right: 32px !important;  
+    }
+}
+@media(max-width: 850px){
+    .is-tab{
+        padding-left:25px !important;
+        padding-right: 25px !important;  
+    }
+}

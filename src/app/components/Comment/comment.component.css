@@ -1,0 +1,13 @@
+.comment{
+    margin-bottom:20px;
+    margin-top:20px;
+}
+.commentId{
+    font-size: 14px;
+    color:#888;
+    margin-bottom:20px;
+}
+.image.is-40x40 {
+    height: 40px;
+    width: 40px;
+}

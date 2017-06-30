@@ -7,6 +7,8 @@ import { TransferHttpModule } from '../modules/transfer-http/transfer-http.modul
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/Header/header.component';
+import { SideArticleComponent } from './components/side-article/side-article.component';
+import { CommentComponent } from './components/comment/comment.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { ContactComponent } from './pages/Contact/contact.component';
 import { BlogComponent } from './pages/Blog/blog.component';
@@ -24,22 +26,37 @@ import { AuthService } from './services/auth.service';
 
 @NgModule({
 	imports: [
-    CommonModule,
-    HttpModule,
-    TransferHttpModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeView},
-      { path: 'about', component: AboutView},
-      { path: 'exp', component: ProjectComponent},
-      { path: 'blog', component: BlogComponent},
-      { path: 'blog/:name', component: ArticleComponent},
-      { path: 'contact', component: ContactComponent}
-    ])
+	    CommonModule,
+	    HttpModule,
+	    TransferHttpModule,
+	    FormsModule,
+	    ReactiveFormsModule,
+	    RouterModule.forRoot([
+	      { path: '', component: HomeView},
+	      { path: 'about', component: AboutView},
+	      { path: 'exp', component: ProjectComponent},
+	      { path: 'blog', component: BlogComponent},
+	      { path: 'blog/:name', component: ArticleComponent},
+	      { path: 'contact', component: ContactComponent}
+	    ])
 	],
-	declarations: [ AppComponent, HeaderComponent, FooterComponent, LoadingComponent, HomeView, AboutView, ModalComponent, ProjectComponent, BlogComponent, ContactComponent, LoginComponent, PostComponent, ArticleComponent ],
-  providers: [ AuthService, SharedService ],
-  exports: [ AppComponent ]
+	declarations: [ 
+		AppComponent,
+		HeaderComponent,
+		LoadingComponent,
+		HomeView,
+		AboutView,
+		ModalComponent,
+		ProjectComponent,
+		BlogComponent,
+		ContactComponent,
+		LoginComponent,
+		PostComponent,
+		ArticleComponent,
+		SideArticleComponent,
+		CommentComponent
+	],
+    providers: [ AuthService, SharedService ],
+    exports: [ AppComponent ]
 })
 export class AppModule {}
