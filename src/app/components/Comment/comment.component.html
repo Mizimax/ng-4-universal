@@ -1,0 +1,35 @@
+<div id="comment">
+  <div class="comment" *ngFor="let comment of comments; let i = index">
+      <div class="card">
+          <div class="card-content" style="padding:1em">
+              <div class="commentId">ความคิดเห็นที่ {{ i+1 }}</div>
+              <div class="content">
+                  <p style="font-size:16px;">{{ comment.comment }}</p>
+              </div>
+              <div class="media">
+                  <div class="media-left">
+                      <figure class="image is-40x40">
+                      <img style="border-radius: 50%" src="static/imgs/user/{{ comment.created_by }}.jpg" alt="Image">
+                      </figure>
+                  </div>
+                  <div class="media-content" >
+                      <p style="font-weight:400;padding-bottom:3px;font-size:14px">{{ comment.created_by }}</p>
+                      <p class="subtitle" style="font-size:12px">{{ comment.created_at | date:'medium' }}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <form #form="ngForm" (ngSubmit)="addComment(form.value)">
+      <div class="field">
+          <label class="label">Message</label>
+          <p class="control">
+              <textarea class="textarea" placeholder="แสดงความคิดเห็น" name="commentText" ngModel required></textarea>
+          </p>
+      </div>
+      <div id="submit" style="height:74px">
+          <button class="button is-primary" (click)="addComment()" style="float:left; margin-top:19px;">Comment</button>
+          <div class="g-recaptcha" data-sitekey="6LfxASUUAAAAAAcl1piDOzqbOvzYEVSviWSGGl1q" data-callback="verifyCallback" style="float:left; margin-left:40px"></div>
+      </div>
+  </form>
+</div>
