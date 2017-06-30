@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Rx';
 
 import { Article } from '../../models/Article';
@@ -10,7 +10,7 @@ import { TransferHttp } from '../../../modules/transfer-http/transfer-http';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-    selector: 'article',
+    selector: 'max-article',
     templateUrl: './article.component.html',
     styleUrls: ['./article.component.css']
 })
@@ -27,7 +27,7 @@ export class ArticleComponent implements OnInit {
     private commentSubs: Subscription
     private addCommentSubs: Subscription
 
-    constructor(private http: TransferHttp, private route:ActivatedRoute, private title: Title, private auth: AuthService) { 
+    constructor(private http: TransferHttp, private route:ActivatedRoute, private title: Title, private auth: AuthService, private meta: Meta) { 
     }
 
     ngOnInit() { 
@@ -43,6 +43,8 @@ export class ArticleComponent implements OnInit {
                     this.article.name = param.name
                     this.isLoading = false
                     this.title.setTitle(data.topic+' - Mizimax.com')
+                    this.meta.updateTag({ name: 'description', content: data.topic+' - Mizimax.com' });
+                    this.meta.updateTag({ name: 'keywords', content: data.tags || ' ' });
                 })
             this.commentSubs = this.http.get('https://maxangeiei.herokuapp.com/api/v1/blog/'+param.name+'/comments')
                 .subscribe((data:any)=>{
@@ -52,7 +54,6 @@ export class ArticleComponent implements OnInit {
     }
 
     addComment(form): void{
-        console.log(this.captchaResponse)
         this.addCommentSubs = this.http.post('https://maxangeiei.herokuapp.com/api/v1/blog/'+this.article.name+'/comments'
                                         , {comment: form.commentText, created_by: this.auth.getLastUser().name, captcha: this.captchaResponse})
                                        .subscribe(data=>{
@@ -63,6 +64,8 @@ export class ArticleComponent implements OnInit {
                                                 updated_at: new Date()
                                             });
                                             (<any>window).grecaptcha.reset()
+                                       },err=>{
+                                           
                                        })
     }
 
@@ -71,6 +74,7 @@ export class ArticleComponent implements OnInit {
         script.src = 'https://www.google.com/recaptcha/api.js';
         script.async = true;
         script.defer = true;
+        console.log(document.head.lastChild)
         if(document.head.lastChild != script)
             document.head.appendChild(script);
     }
@@ -78,6 +82,7 @@ export class ArticleComponent implements OnInit {
 
     verifyCallback(response){
         this.captchaResponse = response
+        console.log(response)
     }
 
     ngOnDestroy() {

@@ -4,7 +4,6 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module';
-import { Title } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/Header/header.component';
@@ -18,6 +17,7 @@ import { AboutView } from './pages/Aboutme/about.component';
 import { LoginComponent } from './components/Modal/Login/login.component';
 import { PostComponent } from './components/Modal/Post/post.component';
 import { ArticleComponent } from './pages/Article/article.component';
+import { FooterComponent } from './components/Footer/footer.component';
 
 import { SharedService } from './services/shared.service';
 import { AuthService } from './services/auth.service';
@@ -38,8 +38,8 @@ import { AuthService } from './services/auth.service';
       { path: 'contact', component: ContactComponent}
     ])
 	],
-	declarations: [ AppComponent, HeaderComponent, LoadingComponent, HomeView, AboutView, ModalComponent, ProjectComponent, BlogComponent, ContactComponent, LoginComponent, PostComponent, ArticleComponent ],
-  providers: [ AuthService, SharedService, Title ],
+	declarations: [ AppComponent, HeaderComponent, FooterComponent, LoadingComponent, HomeView, AboutView, ModalComponent, ProjectComponent, BlogComponent, ContactComponent, LoginComponent, PostComponent, ArticleComponent ],
+  providers: [ AuthService, SharedService ],
   exports: [ AppComponent ]
 })
 export class AppModule {}

@@ -1,0 +1,44 @@
+.me{
+  background: url('static/imgs/footer.jpg');
+  position: relative;
+  height: 250px;
+}
+.overlay{
+  position: absolute;
+  top:0;
+  left:0;
+  background: rgba(0,0,0,0.4);
+  height: 100%;
+  width: 100%;
+}
+.me .contents{
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.box{
+  width: 750px;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+.bottom{
+  background: #555;
+  padding-top:12px; 
+  padding-bottom:12px; 
+}
+.contents{
+  font-size: 14px;
+  color:white;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+@media (max-width: 785px){
+  .box{
+    width: 90%;
+  }
+}

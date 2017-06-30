@@ -5,6 +5,7 @@ export class Article{
     created_by: string
     pic: string
     comment: Comment
+    tags: string
     created_at: Date
     updated_at: Date
 }
