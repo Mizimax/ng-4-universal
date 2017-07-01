@@ -1,6 +1,7 @@
 export class Article{
     name: string
     topic: string
+    sub_title: string
     content: string
     created_by: string
     pic: string

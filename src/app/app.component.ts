@@ -7,7 +7,6 @@ import { TransferState } from '../modules/transfer-state/transfer-state';
 	template: `
 	  <max-header></max-header>
     <router-outlet></router-outlet>
-    <max-footer></max-footer>
     <max-modal></max-modal>
 	`,
   styleUrls: ['./app.css'],

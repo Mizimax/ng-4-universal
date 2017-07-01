@@ -11,13 +11,13 @@
                             <img style="height:50vh" src="static/{{article.pic}}" alt="{{ article.topic }}">
                         </figure>
                         <br>
-                        <h2 class="title is-4" align="center">Subtitle</h2>
+                        <h2 class="title is-4" align="center">{{ article.sub_title }}</h2>
                         <div class="content is-6" style="padding:20px">
                             <span class="tab"></span>{{ article.content }}
                         </div>
                     </div>
                 </div>
-                <div id="sidenav" class="column" style="margin-top:50px">
+                <div id="sidenav" class="column" style="margin-top:65px">
                     <max-side-article></max-side-article>
                 </div>
             </div>
@@ -25,3 +25,4 @@
         </div>
     </div>
 </div>
+<max-footer *ngIf="!isLoading"></max-footer>

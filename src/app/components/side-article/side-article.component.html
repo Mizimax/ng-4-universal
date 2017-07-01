@@ -1,33 +1,55 @@
-<div class="card">
+<div class="card" id="latestArticles">
   <header class="card-header">
     <p class="card-header-title">
-      Component
+      บทความล่าสุด
     </p>
   </header>
   <div class="card-content">
     <div class="content">
-      5555
+      <div class="columns articles">
+        <div class="column" *ngFor="let latestArticle of latestArticles">
+          <div class="columns article">
+            <div class="column is-64px">
+              <figure class="image is-64x64">
+                <img [src]="'static/'+latestArticle.pic">
+              </figure>
+            </div>
+            <div class="column">{{ latestArticle.topic }}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <br>
-<div class="card">
+<div class="card" id="relatedArticles">
   <header class="card-header">
     <p class="card-header-title">
-      Component
+      บทความที่เกี่ยวข้อง
     </p>
   </header>
   <div class="card-content">
     <div class="content">
-      5555
+      <div class="columns articles">
+        <div class="column" *ngFor="let relatedArticle of relatedArticles">
+          <div class="columns article">
+            <div class="column is-64px">
+              <figure class="image is-64x64">
+                <img [src]="'static/'+relatedArticle.pic">
+              </figure>
+            </div>
+            <div class="column">{{ relatedArticle.topic }}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <br>
-<div class="card">
+<div class="card" id="facebook">
   <header class="card-header">
     <p class="card-header-title">
-      Component
+      Facebook
     </p>
   </header>
   <div class="card-content">

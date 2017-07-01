@@ -54,7 +54,8 @@ import { AuthService } from './services/auth.service';
 		PostComponent,
 		ArticleComponent,
 		SideArticleComponent,
-		CommentComponent
+		CommentComponent,
+		FooterComponent
 	],
     providers: [ AuthService, SharedService ],
     exports: [ AppComponent ]

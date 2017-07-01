@@ -11,3 +11,11 @@
     height: 40px;
     width: 40px;
 }
+#comment{
+    width: 75%;
+}
+@media (max-width: 768px){
+    #comment{
+        width: 100%;
+    }
+}

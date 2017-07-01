@@ -1,0 +1,51 @@
+.card-header{
+    background: #FFC31E;
+}
+.card-header p{
+    color:white;
+}
+.article{
+    flex-direction: row;
+}
+.article .column{
+    padding: 0;
+    text-align: left;
+}
+.articles{
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.is-64px{
+    flex-grow: 0;
+    padding: 0;
+}
+.is-64x64{
+    margin: auto;
+}
+@media (max-width: 768px){
+    .article{
+        flex-direction: column;
+    }
+    .article .column{
+        text-align: center;
+    }      
+    .articles{
+        flex-direction: row;
+        display: flex;
+    }
+    .is-64x64{
+        width: 128px;
+        height: 122px
+    }
+    .is-64px{
+        width: auto;
+    }
+    #facebook{
+        display: none;
+    }
+    #latestArticles{
+        display: none;
+    }
+}
