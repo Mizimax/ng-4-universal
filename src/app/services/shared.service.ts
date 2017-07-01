@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class SharedService {
-    private shared: Subject<String> = new Subject<String>()
+    private shared: Subject<any> = new Subject<any>()
     set(value) : void{
         this.shared.next(value)
     }

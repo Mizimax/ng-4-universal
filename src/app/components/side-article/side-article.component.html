@@ -7,7 +7,8 @@
   <div class="card-content">
     <div class="content">
       <div class="columns articles">
-        <div class="column" *ngFor="let latestArticle of latestArticles">
+        <div class="column" *ngFor="let latestArticle of latestArticles" >
+        <a routerLink="/blog/{{ latestArticle.name }}">
           <div class="columns article">
             <div class="column is-64px">
               <figure class="image is-64x64">
@@ -16,6 +17,7 @@
             </div>
             <div class="column">{{ latestArticle.topic }}</div>
           </div>
+        </a>
         </div>
       </div>
     </div>
@@ -32,6 +34,7 @@
     <div class="content">
       <div class="columns articles">
         <div class="column" *ngFor="let relatedArticle of relatedArticles">
+        <a routerLink="/blog/{{ relatedArticle.name }}">
           <div class="columns article">
             <div class="column is-64px">
               <figure class="image is-64x64">
@@ -40,6 +43,7 @@
             </div>
             <div class="column">{{ relatedArticle.topic }}</div>
           </div>
+        </a>
         </div>
       </div>
     </div>

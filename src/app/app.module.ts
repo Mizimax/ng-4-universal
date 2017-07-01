@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/Header/header.component';
 import { SideArticleComponent } from './components/side-article/side-article.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { SideNavComponent } from './components/Sidenav/sidenav.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { ContactComponent } from './pages/Contact/contact.component';
 import { BlogComponent } from './pages/Blog/blog.component';
@@ -55,7 +56,8 @@ import { AuthService } from './services/auth.service';
 		ArticleComponent,
 		SideArticleComponent,
 		CommentComponent,
-		FooterComponent
+		FooterComponent,
+		SideNavComponent
 	],
     providers: [ AuthService, SharedService ],
     exports: [ AppComponent ]

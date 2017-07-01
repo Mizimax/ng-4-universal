@@ -14,6 +14,19 @@ export class HeaderComponent implements OnInit {
     public isLoading: Boolean = false
     constructor(private auth: AuthService, private shared: SharedService) { 
     }
+    ngOnInit() {
+        this.auth.getUser().subscribe((user:Profile)=>{
+            if(user !== null)
+                this.user = user
+            else
+                this.user = new Profile
+        })
+        this.shared.get().subscribe(val=>{
+            if(val.state === 'sidenav' && val.val === false){
+              this.navToggle = false
+            }
+        })
+     }
     modalOpen(){
         this.isLoading = true
         this.auth.fetchUser().then(data=>{
@@ -27,12 +40,8 @@ export class HeaderComponent implements OnInit {
         })
 
     }
-    ngOnInit() {
-        this.auth.getUser().subscribe((user:Profile)=>{
-            if(user !== null)
-                this.user = user
-            else
-                this.user = new Profile
-        })
-     }
+    toggle(){
+        this.navToggle = !this.navToggle
+        this.shared.set({ state: 'sidenav', val: this.navToggle })
+    }
 }

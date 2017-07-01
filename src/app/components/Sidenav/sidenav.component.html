@@ -1,0 +1,35 @@
+<div #sidenav class="sidenav">
+	<nav (click)="cancel()">
+	  <a routerLink="" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">
+		  <div class="side-item">
+			  <i class="fa fa-home" aria-hidden="true"></i>
+			  Home
+		  </div>
+	  </a>
+	  <a routerLink="about" routerLinkActive="is-active">
+		  <div class="side-item">
+			  <i class="fa fa-address-card" aria-hidden="true"></i>
+			  About
+		  </div>
+	  </a>
+	  <a routerLink="exp" routerLinkActive="is-active">
+		  <div class="side-item">
+			  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+			  Experience
+		  </div>
+	  </a>
+	  <a routerLink="blog" routerLinkActive="is-active">
+		  <div class="side-item">
+			  <i class="fa fa-commenting" aria-hidden="true"></i>
+			  Blog
+		  </div>
+	  </a>
+	  <a routerLink="contact" routerLinkActive="is-active">
+		  <div class="side-item">
+			  <i class="fa fa-phone-square" aria-hidden="true"></i>
+			  Contact
+		  </div>
+	  </a>
+	</nav>
+</div>
+<div *ngIf="isOpened" class="overlay" (click)="cancel()"></div>

@@ -13,7 +13,7 @@
     "prebuild:prod": "npm run clean",
     "clean": "rimraf dist",
     "server": "nodemon dist/server/server.js",
-    "dev": "npm run purifycss & webpack --watch",
+    "dev": "webpack --watch",
     "purifycss": "purifycss ./src/css/*.css ./src/app/**/*.html -o ./dist/static/style.css -m"
   },
   "engines": {
