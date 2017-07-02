@@ -1,5 +1,5 @@
 .card-header{
-    background: #FFC31E;
+    background: orange;
 }
 .card-header p{
     color:white;
@@ -15,7 +15,6 @@
     flex-direction: column;
     align-content: center;
     justify-content: center;
-    flex-wrap: wrap;
 }
 .is-64px{
     flex-grow: 0;

@@ -40,11 +40,12 @@ ROUTES.forEach(route => {
   });
 });
 
-const options = {
-  key: fs.readFileSync('cert/cert.key'),
-  cert: fs.readFileSync('cert/cert.pem')
-};
+// const options = {
+//   key: fs.readFileSync('cert/cert.key'),
+//   cert: fs.readFileSync('cert/cert.pem')
+// };
 
-https.createServer(options, app).listen(port, ()=>{
-  console.log('https listens on port '+ port)
-});
+// https.createServer(options, app).listen(port, ()=>{
+//   console.log('https listens on port '+ port)
+// });
+app.listen(port)

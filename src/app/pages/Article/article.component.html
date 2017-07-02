@@ -1,9 +1,11 @@
 <div class="section">
     <div class="container">
-    <loading [height]="400" *ngIf="isLoading"></loading>
-        <div class="myContainer" *ngIf="!isLoading">
+        <div class="myContainer">
             <div class="columns">
-                <div class="column is-three-quarters" style="margin-top:50px">
+                <div class="column is-three-quarters" *ngIf="isLoading">
+                    <loading [height]="0"></loading>
+                </div>
+                <div class="column is-three-quarters" style="margin-top:50px" *ngIf="!isLoading">
                     <h1 class="title is-3">{{article.topic}}</h1>
                     <hr>
                     <div class="content">
@@ -21,7 +23,7 @@
                     <max-side-article></max-side-article>
                 </div>
             </div>
-            <max-comment [topic]="article.name"></max-comment>
+            <max-comment></max-comment>
         </div>
     </div>
 </div>

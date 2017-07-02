@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Rx';
 import { Article } from '../../models/Article';
 
 import { TransferHttp } from '../../../modules/transfer-http/transfer-http';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
     selector: 'max-article',
@@ -21,17 +22,18 @@ export class ArticleComponent implements OnInit {
     private paramSubs: Subscription
     
 
-    constructor(private http: TransferHttp, private route:ActivatedRoute, private title: Title, private meta: Meta) { 
+    constructor(private http: TransferHttp, private route:ActivatedRoute, private title: Title, private meta: Meta, private shared: SharedService) { 
     }
 
     ngOnInit() { 
         this.paramSubs = this.route.params.subscribe(param=>{
-            this.article.name = param.name
+            this.isLoading = true
             this.articleSubs = this.http.get('https://maxangeiei.herokuapp.com/api/v1/blog/'+param.name)
                 .subscribe((data:Article)=>{
-                    this.article = data
-                    this.article.name = param.name
                     this.isLoading = false
+                    this.shared.set({ state: 'articleLoad', topic: param.name })
+                    this.shared.set({ state: 'sideArticleLoad', tag: data.tags})
+                    this.article = data
                     this.title.setTitle(data.topic+' - Mizimax.com')
                     this.meta.updateTag({ name: 'description', content: data.topic+' - Mizimax.com' });
                     this.meta.updateTag({ name: 'keywords', content: data.tags || ' ' });

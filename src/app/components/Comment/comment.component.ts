@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 
 import { TransferHttp } from '../../../modules/transfer-http/transfer-http';
 import { AuthService } from '../../services/auth.service';
+import { SharedService } from '../../services/shared.service';
 
 import { Comment } from '../../models/Article';
 
@@ -14,7 +15,7 @@ import { Subscription } from 'rxjs/Rx';
 })
 export class CommentComponent implements OnInit {
 
-	@Input() topic: string
+    public topic: string
 
 	public comments: Comment[]
 
@@ -22,14 +23,25 @@ export class CommentComponent implements OnInit {
 
 	private commentSubs: Subscription
     private addCommentSubs: Subscription
+    private sharedSubs: Subscription
 
-    constructor(private http: TransferHttp, private auth: AuthService) { 
+    constructor(private http: TransferHttp, private auth: AuthService, private shared: SharedService) { 
     }
     ngOnInit() {
         if(typeof window !== 'undefined'){
             window['verifyCallback'] = this.verifyCallback.bind(this);
             this.render()
         }
+        this.sharedSubs = this.shared.get().subscribe(val=>{
+            if(val.state === 'articleLoad'){
+                this.topic = val.topic
+                this.loadComment()
+            }
+        })
+    }
+    loadComment(){
+        if(this.commentSubs)
+            this.commentSubs.unsubscribe()
         this.commentSubs = this.http.get('https://maxangeiei.herokuapp.com/api/v1/blog/'+this.topic+'/comments')
                 .subscribe((data:any)=>{
                     this.comments = data
@@ -64,6 +76,7 @@ export class CommentComponent implements OnInit {
     }
 
     ngOnDestroy(){
+        this.sharedSubs.unsubscribe()
     	this.commentSubs.unsubscribe()
         if(this.addCommentSubs)
             this.addCommentSubs.unsubscribe()

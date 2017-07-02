@@ -18,7 +18,7 @@ export class SideNavComponent implements OnInit {
     ngOnInit() {
         this.shared.get().subscribe(val=>{
             if(val.state === 'sidenav' && val.val === true){
-              this.sidenav.nativeElement.style.width = '250px'
+              this.sidenav.nativeElement.style.width = '230px'
               this.isOpened = true
             }
             else if(val.state === 'sidenav' && val.val === false){

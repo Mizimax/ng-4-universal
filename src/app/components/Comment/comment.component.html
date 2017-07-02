@@ -1,4 +1,17 @@
 <div id="comment">
+  <form #form="ngForm" (ngSubmit)="addComment(form.value)">
+      <div class="field">
+          <label class="label">Message</label>
+          <p class="control">
+              <textarea class="textarea" placeholder="แสดงความคิดเห็น" name="commentText" ngModel required></textarea>
+          </p>
+      </div>
+      <div id="submit" style="height:74px">
+          <div class="g-recaptcha" data-sitekey="6LfxASUUAAAAAAcl1piDOzqbOvzYEVSviWSGGl1q" data-callback="verifyCallback" style="float:left"></div>
+          <button class="button is-primary" (click)="addComment()" style="float:right; margin-top:19px; margin-right: 20px">Comment</button>
+      </div>
+  </form>
+  <br>
   <p class="title is-4">ความคิดเห็น</p>
   <div class="comment" *ngFor="let comment of comments; let i = index">
       <div class="card">
@@ -21,16 +34,4 @@
           </div>
       </div>
   </div>
-  <form #form="ngForm" (ngSubmit)="addComment(form.value)">
-      <div class="field">
-          <label class="label">Message</label>
-          <p class="control">
-              <textarea class="textarea" placeholder="แสดงความคิดเห็น" name="commentText" ngModel required></textarea>
-          </p>
-      </div>
-      <div id="submit" style="height:74px">
-          <button class="button is-primary" (click)="addComment()" style="float:left; margin-top:19px;">Comment</button>
-          <div class="g-recaptcha" data-sitekey="6LfxASUUAAAAAAcl1piDOzqbOvzYEVSviWSGGl1q" data-callback="verifyCallback" style="float:left; margin-left:40px"></div>
-      </div>
-  </form>
 </div>
