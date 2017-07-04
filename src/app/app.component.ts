@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core'
 import { Router } from '@angular/router'
-import { TransferState } from '../modules/transfer-state/transfer-state';
 
+import { TransferState } from '../modules/transfer-state/transfer-state';
 import { SharedService } from './services/shared.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   constructor(private cache: TransferState, private router: Router) {}
   ngOnInit() {
     this.cache.set('cached', true);
-    this.router.events.subscribe((val) => {
+    this.router.events.subscribe((val:any) => {
         if(typeof window !== 'undefined' && val.url.indexOf('category') === -1)
           window.scrollTo(0, 0)
     });

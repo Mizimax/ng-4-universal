@@ -1,11 +1,12 @@
+/* Core module */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
+/* Component */
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/Header/header.component';
 import { SideArticleComponent } from './components/side-article/side-article.component';
@@ -23,6 +24,7 @@ import { PostComponent } from './components/Modal/Post/post.component';
 import { ArticleComponent } from './pages/Article/article.component';
 import { FooterComponent } from './components/Footer/footer.component';
 
+/* Service */
 import { SharedService } from './services/shared.service';
 import { AuthService } from './services/auth.service';
 
@@ -33,7 +35,6 @@ import { AuthService } from './services/auth.service';
 	    TransferHttpModule,
 	    FormsModule,
 	    ReactiveFormsModule,
-	    InfiniteScrollModule,
 	    RouterModule.forRoot([
 	      { path: '', component: HomeView},
 	      { path: 'about', component: AboutView},

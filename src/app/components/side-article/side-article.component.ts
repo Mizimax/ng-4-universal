@@ -1,50 +1,48 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/Rx';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core'
+
+import { Subscription } from 'rxjs/Rx'
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+
+import { TransferHttp } from '../../../modules/transfer-http/transfer-http'
+import { SharedService } from '../../services/shared.service'
 
 import { Article } from '../../models/Article'
-
-import { TransferHttp } from '../../../modules/transfer-http/transfer-http';
-import { SharedService } from '../../services/shared.service';
 
 @Component({
     selector: 'max-side-article',
     templateUrl: './side-article.component.html',
     styleUrls: ['./side-article.component.css']
 })
-export class SideArticleComponent implements OnInit {
+export class SideArticleComponent implements OnInit, OnDestroy {
 
+    @Input() tag: BehaviorSubject<string>
+
+    /* Show data */
     public latestArticles: Article[]
     public relatedArticles: Article[]
 
-    private latestSubs: Subscription
-    private relatedSubs: Subscription
-    private sharedSubs: Subscription
+    private subscriptions: Subscription = new Subscription()
 
     constructor(private http: TransferHttp, private shared: SharedService) { 
     }
     ngOnInit() {
-        this.sharedSubs = this.shared.get().subscribe(val=>{
-            if(val.state === 'sideArticleLoad')
-                this.loadSideArticle(val.tag)
-        })
+        this.subscriptions.add(
+            this.tag.subscribe(val=>{
+                this.loadSideArticle(val)
+            })
+        )
     }
     loadSideArticle(tag){
-        if(typeof window !== 'undefined'){
-            this.latestSubs = this.http.get('https://maxangeiei.herokuapp.com/api/v1/blogs?sort=-$natural&limit=3')
-              .subscribe((data:Article[])=>{
-                this.latestArticles = data
-              })
-            this.relatedSubs = this.http.get('https://maxangeiei.herokuapp.com/api/v1/blogs?tag='+ tag +'&limit=3')
-              .subscribe((data:Article[])=>{
-                this.relatedArticles = data
-              })
-        }
+        this.http.get('https://maxangeiei.herokuapp.com/api/v1/blogs?sort=-$natural&limit=3')
+          .subscribe((data:Article[])=>{
+            this.latestArticles = data
+          })
+        this.http.get('https://maxangeiei.herokuapp.com/api/v1/blogs?tag='+ tag +'&limit=3')
+          .subscribe((data:Article[])=>{
+            this.relatedArticles = data
+          })
     }
     ngOnDestroy() {
-        this.sharedSubs.unsubscribe()
-        if(this.latestSubs)
-            this.latestSubs.unsubscribe()
-        if(this.relatedSubs)
-            this.relatedSubs.unsubscribe()
+        this.subscriptions.unsubscribe()
     }
 }

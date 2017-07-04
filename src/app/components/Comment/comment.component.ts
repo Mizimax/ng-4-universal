@@ -1,64 +1,68 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, HostListener } from '@angular/core'
 
-import { TransferHttp } from '../../../modules/transfer-http/transfer-http';
-import { AuthService } from '../../services/auth.service';
-import { SharedService } from '../../services/shared.service';
+import { Subscription } from 'rxjs/Rx'
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 
-import { Comment } from '../../models/Article';
+import { TransferHttp } from '../../../modules/transfer-http/transfer-http'
+import { AuthService } from '../../services/auth.service'
 
-import { Subscription } from 'rxjs/Rx';
+import { Comment } from '../../models/Article'
 
 @Component({
     selector: 'max-comment',
     templateUrl: './comment.component.html',
     styleUrls: ['./comment.component.css']
 })
-export class CommentComponent implements OnInit {
+export class CommentComponent implements OnInit, OnDestroy {
 
-    public topic: string
+    @Input() topic: BehaviorSubject<string>
 
 	public comments: Comment[]
 
     private captchaResponse: any
 
-	private commentSubs: Subscription
-    private addCommentSubs: Subscription
-    private sharedSubs: Subscription
+	private subscriptions: Subscription = new Subscription()
 
-    constructor(private http: TransferHttp, private auth: AuthService, private shared: SharedService) { 
-    }
+    constructor(
+        private http: TransferHttp,
+        private auth: AuthService
+    ) { }
+
     ngOnInit() {
         if(typeof window !== 'undefined'){
             window['verifyCallback'] = this.verifyCallback.bind(this);
             this.render()
         }
-        this.sharedSubs = this.shared.get().subscribe(val=>{
-            if(val.state === 'articleLoad'){
-                this.topic = val.topic
-                this.loadComment()
-            }
-        })
+        this.subscriptions.add(
+            this.topic.subscribe(val=>{
+                this.loadComment(val)
+            })
+        )
     }
-    loadComment(){
-        if(this.commentSubs)
-            this.commentSubs.unsubscribe()
-        this.commentSubs = this.http.get('https://maxangeiei.herokuapp.com/api/v1/blog/'+this.topic+'/comments')
-                .subscribe((data:any)=>{
-                    this.comments = data
-                })
+
+    loadComment(topic){
+        this.http.get('https://maxangeiei.herokuapp.com/api/v1/blog/'+topic+'/comments')
+            .subscribe(data=>{
+                this.comments = data
+            })
     }
+
     addComment(form): void{
-        this.addCommentSubs = this.http.post('https://maxangeiei.herokuapp.com/api/v1/blog/'+this.topic+'/comments'
-                                        , {comment: form.commentText, created_by: this.auth.getLastUser().name, captcha: this.captchaResponse})
-                                       .subscribe(data=>{
-                                            this.comments.push({
-                                                comment: form.commentText,
-                                                created_by: this.auth.getLastUser().name,
-                                                created_at: new Date(),
-                                                updated_at: new Date()
-                                            });
-                                            (<any>window).grecaptcha.reset()
-                                       })
+        let url = 'https://maxangeiei.herokuapp.com/api/v1/blog/'+this.topic+'/comments';
+        let data = { comment: form.commentText,
+                     created_by: this.auth.getLastUser().name,
+                     captcha: this.captchaResponse }
+
+        this.http.post(url, data)
+           .subscribe(data=>{
+                this.comments.push({
+                    comment: form.commentText,
+                    created_by: this.auth.getLastUser().name,
+                    created_at: new Date(),
+                    updated_at: new Date()
+                });
+                (<any>window).grecaptcha.reset()
+           })
     }
 
     render(){
@@ -76,9 +80,6 @@ export class CommentComponent implements OnInit {
     }
 
     ngOnDestroy(){
-        this.sharedSubs.unsubscribe()
-    	this.commentSubs.unsubscribe()
-        if(this.addCommentSubs)
-            this.addCommentSubs.unsubscribe()
+        this.subscriptions.unsubscribe()
     } 
 }
