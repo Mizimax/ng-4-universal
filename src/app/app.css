@@ -24,10 +24,10 @@ a{
   transform: translateY(-20px)
 }
 .myContainer{
-  width:85%; 
+  width:87%; 
   margin:0 auto;
 }
-@media (max-width: 450px){
+@media (max-width: 1000px){
   .myContainer{
     width:100%;
   }

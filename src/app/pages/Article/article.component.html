@@ -1,11 +1,9 @@
 <div class="section">
     <div class="container">
-        <div class="myContainer">
+        <loading [height]="400" *ngIf="isLoading"></loading>
+        <div class="myContainer" *ngIf="!isLoading">
             <div class="columns">
-                <div class="column is-three-quarters" *ngIf="isLoading">
-                    <loading [height]="0"></loading>
-                </div>
-                <div class="column is-three-quarters" style="margin-top:50px" *ngIf="!isLoading">
+                <div class="column is-three-quarters" style="margin-top:50px">
                     <h1 class="title is-3">{{article.topic}}</h1>
                     <hr>
                     <div class="content">

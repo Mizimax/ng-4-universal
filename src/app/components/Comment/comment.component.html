@@ -1,4 +1,5 @@
 <div id="comment">
+  <hr>
   <form #form="ngForm" (ngSubmit)="addComment(form.value)">
       <div class="field">
           <label class="label">Message</label>
@@ -8,10 +9,10 @@
       </div>
       <div id="submit" style="height:74px">
           <div class="g-recaptcha" data-sitekey="6LfxASUUAAAAAAcl1piDOzqbOvzYEVSviWSGGl1q" data-callback="verifyCallback" style="float:left"></div>
-          <button class="button is-primary" (click)="addComment()" style="float:right; margin-top:19px; margin-right: 20px">Comment</button>
+          <button class="button is-info" (click)="addComment()" style="float:right; margin-top:19px; margin-right: 20px">Comment</button>
       </div>
   </form>
-  <br>
+  <br><br>
   <p class="title is-4">ความคิดเห็น</p>
   <div class="comment" *ngFor="let comment of comments; let i = index">
       <div class="card">

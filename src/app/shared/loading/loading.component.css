@@ -1,12 +1,12 @@
 .loading{
     position:absolute;
     left:50%;
-    top:45%;
+    top:50%;
     transform: translate(-50%,-50%);
 }
 .loader{
-    height: 2em !important;
-    width: 2em !important;
+    height: 2em;
+    width: 2em;
     border: 2px solid orangered !important;
     border-right-color: transparent !important;
     border-top-color: transparent !important;

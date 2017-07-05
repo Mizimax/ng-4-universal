@@ -11,11 +11,11 @@
         <a routerLink="/blog/{{ latestArticle.name }}">
           <div class="columns article">
             <div class="column is-64px">
-              <figure class="image is-64x64">
-                <img [src]="'static/'+latestArticle.pic">
+              <figure class="image">
+                <img height="100%" width="100%" [src]="'static/'+latestArticle.pic">
               </figure>
             </div>
-            <div class="column">{{ latestArticle.topic }}</div>
+            <div class="column"><p class="description">{{ latestArticle.topic | slice:0:35 }}{{ (latestArticle.topic.length > 35) ? '...' : '' }}</p></div>
           </div>
         </a>
         </div>
@@ -33,15 +33,16 @@
   <div class="card-content">
     <div class="content">
       <div class="columns articles">
+        <loading [height]="130" [size]="1" *ngIf="!relatedArticles"></loading>
         <div class="column" *ngFor="let relatedArticle of relatedArticles">
         <a routerLink="/blog/{{ relatedArticle.name }}">
           <div class="columns article">
             <div class="column is-64px">
-              <figure class="image is-64x64">
-                <img [src]="'static/'+relatedArticle.pic">
+              <figure class="image">
+                <img height="100%" width="100%" [src]="'static/'+relatedArticle.pic">
               </figure>
             </div>
-            <div class="column">{{ relatedArticle.topic }}</div>
+            <div class="column"><p class="description">{{ relatedArticle.topic | slice:0:35 }}{{ (relatedArticle.topic.length > 35) ? '...' : '' }}</p></div>
           </div>
         </a>
         </div>

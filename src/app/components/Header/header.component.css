@@ -1,6 +1,6 @@
 /* 3F51B5 indigo */
 a{
-    color:#aaa;
+    color:#999;
 }
 .nav{
     background-color: white;
@@ -45,7 +45,7 @@ a{
 }
 .loader{
     margin-top:3px;
-    border: 2px solid white !important;
+    border: 2px solid orange !important;
     border-right-color: transparent !important;
     border-top-color: transparent !important;
 }

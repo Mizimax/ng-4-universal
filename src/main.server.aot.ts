@@ -9,7 +9,6 @@ import * as express from 'express';
 import * as compression from 'compression';
 import * as https from 'https';
 import * as fs from 'fs';
-import { platformServer, renderModuleFactory } from '@angular/platform-server';
 import { ServerAppModuleNgFactory } from './ngfactory/app/server-app.module.ngfactory';
 import { ngExpressEngine } from './modules/ng-express-engine/express-engine';
 import { ROUTES } from './routes';

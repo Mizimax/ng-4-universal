@@ -40,7 +40,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
                 this.http.get('https://maxangeiei.herokuapp.com/api/v1/blog/'+param.name)
                     .subscribe((data:Article)=>{
                         this.isLoading = false
-                        this.tag.next(data.tags)
+                        if(typeof window !== 'undefined')
+                            this.tag.next(data.tags)
                         this.article = data
                         this.title.setTitle(data.topic+' - Mizimax.com')
                         this.meta.updateTag({ name: 'description', content: data.topic+' - Mizimax.com' });

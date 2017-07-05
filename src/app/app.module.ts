@@ -39,7 +39,8 @@ import { AuthService } from './services/auth.service';
 	      { path: '', component: HomeView},
 	      { path: 'about', component: AboutView},
 	      { path: 'exp', component: ProjectComponent},
-	      { path: 'blog', component: BlogComponent},
+		  { path: 'blog', component: BlogComponent},
+	      { path: 'blog/search', component: BlogComponent},
 	      { path: 'blog/:name', component: ArticleComponent},
 	      { path: 'contact', component: ContactComponent}
 	    ])
