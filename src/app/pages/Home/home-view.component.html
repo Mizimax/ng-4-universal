@@ -14,7 +14,7 @@
             <hr>
             <loading [height]="300" *ngIf="isLoading"></loading>
             <div class="articles" *ngIf="!isLoading">
-                <div class="article" *ngFor="let article of lastArticles" [routerLink]="['blog',article.name]">
+                <div class="article" *ngFor="let article of latestArticles" [routerLink]="['blog',article.name]">
                    <a [routerLink]="['/blog/'+article.name]">
                         <div class="card">
                             <div class="card-image">

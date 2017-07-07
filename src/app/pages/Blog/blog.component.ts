@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/Rx';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { Article } from '../../models/Article';
+import { TransferHttp } from '../../../modules/transfer-http/transfer-http'
+import { SharedService } from '../../services/shared.service'
 
-import { TransferHttp } from '../../../modules/transfer-http/transfer-http';
-import { SharedService } from '../../services/shared.service';
+import { Article } from '../../models/Article'
 
+import { Observable, Subscription } from 'rxjs/Rx';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
@@ -22,74 +21,61 @@ import 'rxjs/add/operator/switchMap';
 export class BlogComponent implements OnInit {
 
   public Articles : Article[]
+
   public isLoading : Boolean = true
+
   public page : number = 1
   public totalPages : number
   public paginator : any[] = [1]
+
   public category : string = ''
-
   public searchWord : string = ''
-  public searchCtrl = new FormControl();
 
-  private pageSubs : Subscription
-  private countSubs : Subscription
-  private searchSubs : Subscription
-  private querySubs : Subscription
+  private navTimeOut : any
   private limit : number = 9
+  private subscriptions : object = {}
 
-  constructor(private http:TransferHttp, private shared:SharedService, private route: ActivatedRoute, private router: Router, private title: Title) {}
+  constructor(
+    private http:TransferHttp,
+    private shared:SharedService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private title: Title
+  ) {
+    title.setTitle('Articles - Mizimax.com')
+  }
 
   ngOnInit() {
-
-    this.title.setTitle('Articles - Mizimax.com')
-
-    this.searchSubs = this.searchCtrl.valueChanges
-                          .debounceTime(500)
-                          .distinctUntilChanged()
-                          .switchMap(
-                            value => {
-                              this.isLoading = true
-                              if(this.pageSubs)
-                                this.pageSubs.unsubscribe()
-
-                              this.getTotalPage(value, this.category).then(count=>count.num/this.limit).then(count=>{
-                                this.totalPages = count
-                                this.paginator = this.setPaginator(this.page || 1, count)
-                              })
-
-                              return this.getPage(this.page,this.category,value).then(data=>{
-                                return data
-                              })
-                            }
-                          ).subscribe((data:Article[])=>{
-                            this.isLoading = false
-                            this.Articles = data
-                          })
-
-    this.querySubs = this.route.queryParams.subscribe(queryParam=>{
+    
+    this.subscriptions['routeParams'] = this.route.queryParams.subscribe(queryParam=>{
       if(!queryParam.page){
+        /* If no default page */
         this.router.navigate(['blog'], { queryParams: { page : 1}})
       }else{   
         /* Setting variable */
         this.category = queryParam.category || ''
         this.page = Number(queryParam.page) || 1
-
         this.isLoading = true
-        if(this.pageSubs)
-          this.pageSubs.unsubscribe()
 
-        this.getTotalPage('',this.category).then(count=>count.num/this.limit).then(count=>{
+        /* Clear http subscription */
+        if(this.subscriptions['getArticle'])
+          this.subscriptions['getArticle'].unsubscribe()
+        if(this.subscriptions['getCountArticle'])
+          this.subscriptions['getCountArticle'].unsubscribe()
+        
+        /* Load articles */
+        this.subscriptions['getArticle'] = this.getArticle(this.page, this.category, this.searchWord).subscribe(data=>{
+          this.Articles = data
+          this.isLoading = false
+        })
+
+        /* Get count of articles */
+        this.subscriptions['getCountArticle'] = this.getCountArticle(this.searchWord, this.category).map(count=>count.num/this.limit).subscribe(count=>{
           this.totalPages = count
           this.paginator = this.setPaginator(this.page, count)
           if(this.page > Math.ceil(count))
               this.router.navigate(['blog'], { queryParams: { page : 1}})
         })
-
-        this.getPage(this.page, this.category, '').then(data=>{
-          this.Articles = data
-          this.isLoading = false
-        })
-
       }
     })
   }
@@ -114,44 +100,37 @@ export class BlogComponent implements OnInit {
     }
   }
 
-  getTotalPage(search?: string, category?: string) : Promise<any>{
-    return new Promise((resolve,reject)=>{
-      this.countSubs = this.http.get('https://maxangeiei.herokuapp.com/api/v1/blogs/count?search='+search+'&category='+category)
-      .subscribe(count=>{
-        resolve(count)
-      }, err=>{
-        reject(err)
-      })
-    })
+  getCountArticle(search?: string, category?: string) : Observable<any>{
+    const url = 'https://maxangeiei.herokuapp.com/api/v1/blogs/count?search='+search+'&category='+category
+    return this.http.get(url)
   }
 
-  getPage(page: number = 1, category? : string , search? : string) : Promise<Article[]>{
-    return new Promise((resolve,reject)=>{
-    this.pageSubs = this.http.get('https://maxangeiei.herokuapp.com/api/v1/blogs?sort=-$natural&limit='+this.limit+'&offset='+((page-1)*this.limit)+'&search='+search+'&category='+category)
-      .subscribe((data:Article[])=>{
-        resolve(data)
-      }, err=>{
-        reject(err)
-      })
-    })
+  getArticle(page: number = 1, category? : string , search? : string) : Observable<Article[]>{
+    const url = 'https://maxangeiei.herokuapp.com/api/v1/blogs?sort=-$natural&limit='+this.limit+'&offset='+((page-1)*this.limit)+'&search='+search+'&category='+category
+    return this.http.get(url)
+  }
+
+  search(){
+    this.router.navigate(['blog'],{ queryParams: { search: this.searchWord, page: 1}})
+  }
+
+  searchChange(){
+    if(this.navTimeOut)
+      clearTimeout(this.navTimeOut)
+    this.navTimeOut = setTimeout(()=>this.search(), 500)
   }
 
   activeCategory(category): Boolean{
     return this.category!==category
   }
 
-  modalOpen(): void{
+  open(){
     this.shared.set('post')
   }
 
   ngOnDestroy() {
-    if(this.pageSubs)
-      this.pageSubs.unsubscribe()
-    if(this.countSubs)
-      this.countSubs.unsubscribe()
-    if(this.searchSubs)
-      this.searchSubs.unsubscribe()
-    if(this.querySubs)
-      this.querySubs.unsubscribe()
+    Object.keys(this.subscriptions).forEach(subs=>{
+      this.subscriptions[subs].unsubscribe()
+    })
   }
 }

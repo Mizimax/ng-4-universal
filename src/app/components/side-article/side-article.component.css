@@ -1,7 +1,7 @@
 .card-header{
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
-    background: #3273dc;
+    background: white;
 }
 .card{
     border-top-right-radius: 6px;
@@ -16,7 +16,7 @@ a:hover .description{
     color: #3273dc;
 }
 .card-header p{
-    color:white;
+    color:black;
     font-size: 14px;
 }
 .article{
@@ -48,6 +48,7 @@ a:hover .description{
 @media (max-width: 768px){
     .article{
         flex-direction: column;
+        padding: 15px;
     }
     .article .column{
         text-align: center;

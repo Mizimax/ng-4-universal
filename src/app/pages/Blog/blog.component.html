@@ -15,10 +15,10 @@
                     <div class="column" style="margin-top:8px;" align="center">
                         <div class="field has-addons" style="justify-content:center;">
                         <p class="control">
-                            <input class="input" type="text" placeholder="Find a article" [value]="searchWord" [formControl]="searchCtrl">
+                            <input class="input" type="text" placeholder="Find a article" [(ngModel)]="searchWord" (ngModelChange)="searchChange()">
                         </p>
                         <p class="control">
-                            <a class="button is-info">
+                            <a class="button is-info" (click)="search()">
                             Search
                             </a>
                         </p>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <hr>
-
+                <div class="no-result" *ngIf="!isLoading && Articles.length < 1"><p>No Result...</p></div>
                 <loading [height]="400" *ngIf="isLoading"></loading>
                 <div *ngIf="!isLoading">
                 <div class="articles">
@@ -71,4 +71,4 @@
         </div>
     </div>
 </div>
-<max-footer *ngIf="!isLoading"></max-footer>
+<max-footer *ngIf="!isLoading" (click)="open()"></max-footer>

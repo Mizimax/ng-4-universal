@@ -24,6 +24,16 @@
 .category{
     text-align: right;
 }
+.no-result{
+    font-size:22px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.no-result p{
+    transform: translateY(-200%);
+}
 @media (max-width: 768px){
     .category{
         text-align:center;
