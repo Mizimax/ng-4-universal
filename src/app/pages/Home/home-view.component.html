@@ -10,8 +10,8 @@
     <div class="container">
         <div class="myContainer">
         <div class="last-article" style="margin-top:30px">
-            <h3 class="title is-3">บทความล่าสุด</h3>
-            <hr>
+            <!--<h3 class="title is-3" style="color:#888;">บทความล่าสุด</h3>
+            <hr>-->
             <loading [height]="300" *ngIf="isLoading"></loading>
             <div class="articles" *ngIf="!isLoading">
                 <div class="article" *ngFor="let article of latestArticles" [routerLink]="['blog',article.name]">
@@ -32,9 +32,9 @@
                                     <img style="border-radius: 50%" src="static/imgs/user/{{ article.created_by }}.jpg" alt="Image">
                                     </figure>
                                 </div>
-                                <div class="media-content" >
-                                    <p style="font-weight:400;padding-bottom:3px;">{{ article.created_by }}</p>
-                                    <p class="subtitle" style="font-size:12px">{{ article.created_at | date:'medium' }}</p>
+                                <div class="media-content" style="margin-top:3px">
+                                    <p style="font-weight:400;padding-bottom:3px; font-size:14px"><b>โพสโดย : </b>{{ article.created_by }}</p>
+                                    <p class="subtitle" style="font-size:12px"><b>เวลา : </b>{{ article.created_at | date:'medium' }}</p>
                                 </div>
                                 </div>
                             </div>

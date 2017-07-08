@@ -1,3 +1,8 @@
+.section{
+  -webkit-box-shadow: 0 10px 20px -8px #aaa inset;
+  -moz-box-shadow: 0 10px 20px -8px #aaa inset;
+  box-shadow: 0 10px 20px -8px #aaa inset;
+}
 .articles{
     display: flex;
     flex-direction: row;
@@ -7,16 +12,30 @@
 }
 .article{
     width:290px;
-    margin:15px;
+    margin:12px;
     cursor:pointer;
 }
 .header{
   position: relative;
   height: 450px;
   background: url('static/imgs/header.jpg');
-  background-position: 50% 90%;
+  background-position: 50% 82%;
+  background-size: 100%;
   background-repeat: no-repeat;
-  background-color: black;
+  background-color: #555;
+  transition: all 1.6s;
+}
+.header .header-content:hover {
+  background-position: 73.5% 40%;
+  background-size: 180%;
+}
+.card{
+  box-shadow: 0 1px 7px rgba(0,0,0,.05) !important;
+  border-radius: 3px;
+}
+.card img{
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 .overlay{
   height: 450px;

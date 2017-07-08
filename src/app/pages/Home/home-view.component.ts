@@ -14,6 +14,8 @@ import { TransferHttp } from '../../../modules/transfer-http/transfer-http';
 })
 export class HomeView implements OnInit {
 
+  public animation: Boolean = false
+
   public latestArticles : Article[]
   public isLoading: Boolean = true
 
@@ -30,7 +32,8 @@ export class HomeView implements OnInit {
         this.isLoading = false
       })
   }
+
   ngOnDestroy() {
-    //
+    
   }
 }

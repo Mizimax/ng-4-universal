@@ -1,11 +1,12 @@
 .card-header{
-    border-top-right-radius: 6px;
-    border-top-left-radius: 6px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
     background: white;
 }
-.card{
-    border-top-right-radius: 6px;
-    border-top-left-radius: 6px;
+.card:hover{
+  -ms-transform: scale(1, 1); /* IE 9 */
+  -webkit-transform: scale(1, 1); /* Safari */
+  transform: scale(1, 1);
 }
 .description{
     margin-left:5px;
