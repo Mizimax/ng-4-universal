@@ -15,7 +15,7 @@ import { ROUTES } from './routes';
 import { enableProdMode } from '@angular/core';
 enableProdMode();
 const app = express();
-const port = 4444;
+const port = 8080;
 
 app.engine('html', ngExpressEngine({
   aot: true,
