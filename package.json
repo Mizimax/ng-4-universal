@@ -4,6 +4,7 @@
   "main": "server.js",
   "repository": {},
   "scripts": {
+  	"prestart": "npm run build:prod",
     "start": "node dist/server/server.js",
     "build": "webpack",
     "build:aot": "npm run purifycss & webpack --env.aot --env.client & webpack --env.aot --env.server",
