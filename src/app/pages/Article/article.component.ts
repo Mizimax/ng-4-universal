@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Title, Meta } from '@angular/platform-browser'
 
-import { Subscription } from 'rxjs/Rx'
+import { Subscription } from "rxjs/Subscription";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 
 import { TransferHttp } from '../../../modules/transfer-http/transfer-http'

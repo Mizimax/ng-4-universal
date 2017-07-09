@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
 
 import { TransferHttp } from '../../../../modules/transfer-http/transfer-http';
 import { AuthService } from '../../../services/auth.service';

@@ -1,7 +1,5 @@
 import 'zone.js/dist/zone';
 import 'reflect-metadata';
-import 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 
 /** IE9, IE10 and IE11 requires all of the following polyfills. **/
 import 'core-js/es6/symbol';

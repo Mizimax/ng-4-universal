@@ -1,10 +1,13 @@
-import { Http } from '@angular/http';
-import { Profile } from '../models/Profile';
-import { BehaviorSubject, Observable } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
+import { Profile } from '../models/Profile';
+
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+
 
 @Injectable()
 export class AuthService {

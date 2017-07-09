@@ -8,10 +8,8 @@ import { SharedService } from '../../services/shared.service'
 
 import { Article } from '../../models/Article'
 
-import { Observable, Subscription } from 'rxjs/Rx';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
+import { Subscription } from "rxjs/Subscription";
+import { Observable } from "rxjs/Observable";
 
 @Component({
 	selector: 'blog',

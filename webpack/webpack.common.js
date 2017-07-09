@@ -14,8 +14,18 @@ module.exports = {
   module: {
     rules: [
       { test: /\.ts$/, loader: '@ngtools/webpack' },
-      { test: /\.css$/, loader: 'raw-loader' },
-      { test: /\.html$/, loader: 'raw-loader' }
+      { test: /\.css$/, loaders: ['raw-loader'] },
+      { test: /\.html$/, loaders: [
+          'raw-loader',
+          {
+            loader: 'html-minify-loader',
+            options: {
+              quotes: true,
+              dom: { lowerCaseAttributeNames: false }
+            }
+          }
+        ] 
+      }
     ]
   },
   plugins: []
