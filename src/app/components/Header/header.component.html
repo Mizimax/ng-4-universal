@@ -32,7 +32,7 @@
       <div class="has-dropdown">
         <a class="nav-item nav-icon" (click)="dropdownToggle()">
           <span class="icon">
-            <i class="fa fa-search" style="font-size:20px;color:#555"></i>
+            <i class="fa fa-search"></i>
           </span>
         </a>
         <div class="dropdown" [ngClass]="{'show': dropdownOpen}">
@@ -43,8 +43,10 @@
                     <input class="input" type="text" [(ngModel)]="searchTxt" placeholder="Search...">
                 </p>
                 <p class="control">
-                    <a class="button is-warning" [routerLink]="['blog','search']" [queryParams]="{search: searchTxt, page: 1}">
-                    Search
+                    <a class="button" (click)="dropdownOpen = false" [routerLink]="['blog','search']" [queryParams]="{search: searchTxt, page: 1}">
+                      <span class="icon">
+                        <i class="fa fa-search"></i>
+                      </span>
                     </a>
                 </p>
               </div>
@@ -52,18 +54,11 @@
           </div>
         </div>
       </div>
-      <div class="has-dropdown">
-        <a class="nav-item nav-icon" (click)="modalOpen()">
-          <span class="icon">
-            <i class="fa fa-user-circle" style="font-size:20px;color:#555"></i>
-          </span>
-        </a>
-        <div class="dropdown">
-          <div class="card">
-            555
-          </div>
-        </div>
-      </div>
+      <a class="nav-item nav-icon" (click)="modalOpen()">
+        <span class="icon">
+          <i class="fa fa-user-circle"></i>
+        </span>
+      </a>
     </div>
   </div>
 </nav>

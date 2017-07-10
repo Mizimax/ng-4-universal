@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
-import { Title, Meta } from '@angular/platform-browser'
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from 'rxjs/Subscription';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 
 import { TransferHttp } from '../../../modules/transfer-http/transfer-http'
@@ -32,7 +32,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         private meta: Meta
     ) { }
 
-    ngOnInit() { 
+    ngOnInit() {
         this.subscriptions.add(
             this.route.params.subscribe(param=>{
                 this.isLoading = true
@@ -40,16 +40,31 @@ export class ArticleComponent implements OnInit, OnDestroy {
                 this.http.get('https://maxangeiei.herokuapp.com/api/v1/blog/'+param.name)
                     .subscribe((data:Article)=>{
                         this.isLoading = false
-                        if(typeof window !== 'undefined')
-                            this.tag.next(data.tags)
                         this.article = data
+                        if(typeof window !== 'undefined'){
+                            this.tag.next(data.tags)
+                            this.sharedRender()
+                        }
                         this.title.setTitle(data.topic+' - Mizimax.com')
-                        this.meta.updateTag({ name: 'description', content: data.topic+' - Mizimax.com' });
-                        this.meta.updateTag({ name: 'keywords', content: data.tags || ' ' });
+                        this.meta.updateTag({ name: 'description', content: data.topic+' - Mizimax.com' })
+                        this.meta.updateTag({ name: 'keywords', content: data.tags || ' ' })
+                        this.meta.updateTag({ name: 'og:url', content: 'https://mizimax.com/blog/'+param.name })
+                        this.meta.updateTag({ name: 'og:type', content: 'website' })
+                        this.meta.updateTag({ name: 'og:title', content: data.topic })
+                        this.meta.updateTag({ name: 'og:description', content: data.sub_title })
+                        this.meta.updateTag({ name: 'og:image', content: 'https://mizimax.com/static/imgs/'+data.pic })
                     })
             })
         )
     }
+
+    sharedRender(){
+        let doc = <HTMLDivElement>document.getElementById('sharedButton')
+        let script = document.createElement('script')
+        script.src = '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5963e1d731552d8a'
+        doc.appendChild(script)
+    }
+
     ngOnDestroy() {
         this.subscriptions.unsubscribe()
     }

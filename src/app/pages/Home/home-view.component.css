@@ -2,6 +2,7 @@
   -webkit-box-shadow: 0 10px 20px -8px #aaa inset;
   -moz-box-shadow: 0 10px 20px -8px #aaa inset;
   box-shadow: 0 10px 20px -8px #aaa inset;
+  background: #F5F5F5;
 }
 .articles{
     display: flex;
@@ -11,9 +12,22 @@
     align-content: flex-start;
 }
 .article{
-    width:290px;
-    margin:12px;
+    width:230px;
+    margin:8px;
     cursor:pointer;
+}
+.h-content {
+   width: 100%; 
+   text-align: center; 
+   border-bottom: 1px solid #bbb; 
+   line-height: 0.1em;
+   margin: 10px 0 30px; 
+}
+.h-content span { 
+    font-size: 28px;
+    font-weight: 300;
+    background:#f5f5f5; 
+    padding:0 20px; 
 }
 .header{
   position: relative;

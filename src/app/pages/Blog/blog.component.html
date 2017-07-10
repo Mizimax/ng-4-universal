@@ -3,14 +3,14 @@
         <div class="myContainer">
             <div class="allArticle" style="margin-top:50px">
                 <div class="columns">
-                    <div class="column is-one-quarter">
-                        <h3 class="title is-3">Articles</h3>
+                    <div class="column is-one-quarter" align="center">
+                        <h3 class="title is-3">All Articles</h3>
                     </div>
-                    <div class="column category" style="margin-top:8px;">
-                        <a class="button is-warning" [ngClass]="{'is-outlined': activeCategory('all')}" [routerLink]="['/blog', 'search']" [queryParams]="{page: 1}">All</a>
+                    <div class="column category" align="right" style="margin-top:8px;">
+                        <a class="button is-info" [ngClass]="{'is-outlined': activeCategory('all')}" [routerLink]="['/blog', 'search']" [queryParams]="{page: 1}">All</a>
                         <a class="button is-info" [ngClass]="{'is-outlined': activeCategory('web')}"  [routerLink]="['/blog', 'search']" [queryParams]="{category: 'web', page: 1}">Web</a>
-                        <a class="button is-danger" [ngClass]="{'is-outlined': activeCategory('mobile')}" [routerLink]="['/blog', 'search']" [queryParams]="{category: 'mobile', page: 1}">Mobile</a>
-                        <a class="button is-primary" [ngClass]="{'is-outlined': activeCategory('tech')}" [routerLink]="['/blog', 'search']" [queryParams]="{category: 'tech', page: 1}">Technology</a>
+                        <a class="button is-info" [ngClass]="{'is-outlined': activeCategory('mobile')}" [routerLink]="['/blog', 'search']" [queryParams]="{category: 'mobile', page: 1}">Mobile</a>
+                        <a class="button is-info" [ngClass]="{'is-outlined': activeCategory('tech')}" [routerLink]="['/blog', 'search']" [queryParams]="{category: 'tech', page: 1}">Technology</a>
                     </div>
                     <div class="column" style="margin-top:8px;" align="center">
                         <div class="field has-addons" style="justify-content:center;">
@@ -18,8 +18,10 @@
                             <input class="input" type="text" placeholder="Find a article" [(ngModel)]="searchWord" (ngModelChange)="searchChange()">
                         </p>
                         <p class="control">
-                            <a class="button is-info" (click)="search()">
-                            Search
+                            <a class="button" (click)="search()">
+                            <span class="icon">
+                                <i class="fa fa-search"></i>
+                            </span>
                             </a>
                         </p>
                         </div>
@@ -32,7 +34,7 @@
                 <div class="articles">
                     <div class="article" *ngFor="let article of Articles">
                         <a [routerLink]="['/blog/'+article.name]">
-                            <div class="card">
+                            <div class="card animate">
                                 <div class="card-image">
                                     <figure class="image is-4by3">
                                     <img [src]="'static/'+article.pic" alt="Image">
@@ -62,7 +64,7 @@
                 <nav class="pagination"> 
                     <ul class="pagination-list" style="justify-content:center">
                         <li *ngFor="let page of paginator" >
-                            <a class="pagination-link" [routerLink]="['/blog']" [queryParams]="{page: page.txt!=='...'? page: page.value}" routerLinkActive="is-current">{{ page.txt!=='...'? page: page.txt }}</a>
+                            <a class="pagination-link" [routerLink]="['/blog', 'search']" [queryParams]="{page: page.txt!=='...'? page: page.value}" routerLinkActive="is-current">{{ page.txt!=='...'? page: page.txt }}</a>
                         </li>
                     </ul>
                 </nav>

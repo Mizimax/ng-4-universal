@@ -21,8 +21,11 @@
     background: orange;
     border-color:orange;
 }
-.category{
-    text-align: right;
+.category a{
+    margin-right:12px;
+}
+.category a:last-child{
+    margin:0;
 }
 .no-result{
     font-size:22px;
@@ -40,7 +43,7 @@
   transform: scale(1.03, 1.03);
 }
 @media (max-width: 768px){
-    .category{
-        text-align:center;
+    .column{
+        text-align: center;
     }
 }

@@ -6,6 +6,8 @@
                 <div class="column is-three-quarters" style="margin-top:50px">
                     <h1 class="title is-3">{{article.topic}}</h1>
                     <hr>
+                    <div class="addthis_inline_share_toolbox"></div>
+                    <hr>
                     <div class="content">
                         <figure class="image">
                             <img style="height:50vh" src="static/{{article.pic}}" alt="{{ article.topic }}">
@@ -23,6 +25,7 @@
             </div>
             <max-comment [topic]="topic"></max-comment>
         </div>
+        <div id="sharedButton"></div>
     </div>
 </div>
 <max-footer *ngIf="!isLoading"></max-footer>

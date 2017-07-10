@@ -4,7 +4,7 @@ body{
 a{
   color:orange;
 }
-.card{
+.card.animate{
   border-radius: 3px;
   transition: all .3s;
 }

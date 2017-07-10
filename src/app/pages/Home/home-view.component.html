@@ -3,20 +3,19 @@
   <div class="header-content">
     <br>
     <h1 class="title is-4" style="text-align:center; color:white"><span class="myLogo">M</span>Mizimax</h1><br>
-    <h2>แบ่งปันความรู้ ข่าวสาร และเทคนิคเจ๋งๆ ในการเขียนโปรแกรมแบบง่ายๆ ชิลๆ</h2>
+    <h2>All about me (Web, Mobile, Technologies, etc.)</h2>
   </div>
 </div>
 <div class="section">
     <div class="container">
         <div class="myContainer">
         <div class="last-article" style="margin-top:30px">
-            <!--<h3 class="title is-3" style="color:#888;">บทความล่าสุด</h3>
-            <hr>-->
+            <h2 class="h-content"><span>Most Popular Articles</span></h2>
             <loading [height]="300" *ngIf="isLoading"></loading>
             <div class="articles" *ngIf="!isLoading">
                 <div class="article" *ngFor="let article of latestArticles" [routerLink]="['blog',article.name]">
                    <a [routerLink]="['/blog/'+article.name]">
-                        <div class="card">
+                        <div class="card animate">
                             <div class="card-image">
                                 <figure class="image is-4by3">
                                 <img [src]="'static/'+article.pic" alt="Image">
@@ -26,7 +25,7 @@
                                 <div class="content">
                                     <h2 class="title is-5">{{ article.topic }}</h2>
                                 </div>
-                                <div class="media">
+                                <!--<div class="media">
                                 <div class="media-left">
                                     <figure class="image is-48x48">
                                     <img style="border-radius: 50%" src="static/imgs/user/{{ article.created_by }}.jpg" alt="Image">
@@ -36,7 +35,7 @@
                                     <p style="font-weight:400;padding-bottom:3px; font-size:14px"><b>โพสโดย : </b>{{ article.created_by }}</p>
                                     <p class="subtitle" style="font-size:12px"><b>เวลา : </b>{{ article.created_at | date:'medium' }}</p>
                                 </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </a>

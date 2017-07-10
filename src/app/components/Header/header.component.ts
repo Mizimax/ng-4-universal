@@ -1,12 +1,17 @@
-import { SharedService } from '../../services/shared.service';
+import { Component, ElementRef, OnInit } from '@angular/core';
+
 import { Profile } from '../../models/Profile';
+
+import { SharedService } from '../../services/shared.service';
 import { AuthService } from '../../services/auth.service';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'max-header',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.css']
+    styleUrls: ['./header.component.css'],
+    host: {
+        '(document:click)': 'onClick($event)',
+    }
 })
 export class HeaderComponent implements OnInit {
 
@@ -15,7 +20,7 @@ export class HeaderComponent implements OnInit {
     public dropdownOpen : Boolean = false
     public searchTxt: string
 
-    constructor(private auth: AuthService, private shared: SharedService) { 
+    constructor(private auth: AuthService, private shared: SharedService, private elem: ElementRef) { 
     }
     ngOnInit() {
         this.auth.getUser().subscribe((user:Profile)=>{
@@ -29,7 +34,13 @@ export class HeaderComponent implements OnInit {
               this.navToggle = false
             }
         })
-     }
+    }
+
+    onClick(event) {
+    if (!this.elem.nativeElement.contains(event.target)) // or some similar check
+        this.dropdownOpen = false
+    }
+
     modalOpen(){
         this.shared.set('login')
     }
