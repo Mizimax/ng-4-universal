@@ -7,10 +7,10 @@
                         <h3 class="title is-3">Articles</h3>
                     </div>
                     <div class="column category" style="margin-top:8px;">
-                        <a class="button is-warning" [ngClass]="{'is-outlined': activeCategory('all')}" [routerLink]="['/blog']" [queryParams]="{page: 1}">All</a>
-                        <a class="button is-info" [ngClass]="{'is-outlined': activeCategory('web')}"  [routerLink]="['/blog']" [queryParams]="{category: 'web', page: 1}">Web</a>
-                        <a class="button is-danger" [ngClass]="{'is-outlined': activeCategory('mobile')}" [routerLink]="['/blog']" [queryParams]="{category: 'mobile', page: 1}">Mobile</a>
-                        <a class="button is-primary" [ngClass]="{'is-outlined': activeCategory('tech')}" [routerLink]="['/blog']" [queryParams]="{category: 'tech', page: 1}">Technology</a>
+                        <a class="button is-warning" [ngClass]="{'is-outlined': activeCategory('all')}" [routerLink]="['/blog', 'search']" [queryParams]="{page: 1}">All</a>
+                        <a class="button is-info" [ngClass]="{'is-outlined': activeCategory('web')}"  [routerLink]="['/blog', 'search']" [queryParams]="{category: 'web', page: 1}">Web</a>
+                        <a class="button is-danger" [ngClass]="{'is-outlined': activeCategory('mobile')}" [routerLink]="['/blog', 'search']" [queryParams]="{category: 'mobile', page: 1}">Mobile</a>
+                        <a class="button is-primary" [ngClass]="{'is-outlined': activeCategory('tech')}" [routerLink]="['/blog', 'search']" [queryParams]="{category: 'tech', page: 1}">Technology</a>
                     </div>
                     <div class="column" style="margin-top:8px;" align="center">
                         <div class="field has-addons" style="justify-content:center;">

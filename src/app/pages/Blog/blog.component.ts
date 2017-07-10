@@ -48,7 +48,7 @@ export class BlogComponent implements OnInit {
     this.subscriptions['routeParams'] = this.route.queryParams.subscribe(queryParam=>{
       if(!queryParam.page){
         /* If no default page */
-        this.router.navigate(['blog'], { queryParams: { page : 1}})
+        this.router.navigate(['blog','search'], { queryParams: { page : 1}})
       }else{   
         /* Setting variable */
         this.category = queryParam.category || ''
@@ -73,7 +73,7 @@ export class BlogComponent implements OnInit {
           this.totalPages = count
           this.paginator = this.setPaginator(this.page, count)
           if(this.page > Math.ceil(count) && this.Articles.length >= 1)
-              this.router.navigate(['blog'], { queryParams: { page : 1}})
+              this.router.navigate(['blog','search'], { queryParams: { page : 1}})
         })
       }
     })
@@ -110,7 +110,7 @@ export class BlogComponent implements OnInit {
   }
 
   search(){
-    this.router.navigate(['blog'],{ queryParams: { search: this.searchWord, page: 1}})
+    this.router.navigate(['blog','search'],{ queryParams: { search: this.searchWord, page: 1}})
   }
 
   searchChange(){
