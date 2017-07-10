@@ -53,6 +53,7 @@ export class BlogComponent implements OnInit {
         /* Setting variable */
         this.category = queryParam.category || ''
         this.page = Number(queryParam.page) || 1
+        this.searchWord = queryParam.search || ''
         this.isLoading = true
 
         /* Clear http subscription */
@@ -71,7 +72,7 @@ export class BlogComponent implements OnInit {
         this.subscriptions['getCountArticle'] = this.getCountArticle(this.searchWord, this.category).map(count=>count.num/this.limit).subscribe(count=>{
           this.totalPages = count
           this.paginator = this.setPaginator(this.page, count)
-          if(this.page > Math.ceil(count))
+          if(this.page > Math.ceil(count) && this.Articles.length >= 1)
               this.router.navigate(['blog'], { queryParams: { page : 1}})
         })
       }

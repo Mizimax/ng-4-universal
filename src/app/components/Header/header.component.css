@@ -8,11 +8,19 @@ a{
     width: 100%;
 }
 .nav-item{
-    padding-left:20px !important;
-    padding-right: 20px !important;
+    padding-left:20px;
+    padding-right: 20px;
 }
 .nav-item:hover{
     color:#555;
+}
+.nav-icon{
+    padding: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.card{
+    width: 200px;
 }
 .is-tab{
     padding-left:40px !important;
@@ -43,11 +51,18 @@ a{
 .fa-user-o:hover{
     color:white !important;
 }
-.loader{
-    margin-top:3px;
-    border: 2px solid orange !important;
-    border-right-color: transparent !important;
-    border-top-color: transparent !important;
+.dropdown.show{
+    display: block;
+}
+.dropdown{
+    display: none;
+    position: absolute;
+    padding-top: 10px;
+    z-index: 9999;
+    right: 0;
+}
+.dropdown-content{
+    padding:10px;
 }
 @media(max-width: 940px){
     .is-tab{

@@ -9,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
     public user : Profile = new Profile
     public navToggle : Boolean = false
-    public isLoading: Boolean = false
+    public dropdownOpen : Boolean = false
+    public searchTxt: string
+
     constructor(private auth: AuthService, private shared: SharedService) { 
     }
     ngOnInit() {
@@ -28,20 +31,13 @@ export class HeaderComponent implements OnInit {
         })
      }
     modalOpen(){
-        this.isLoading = true
-        this.auth.fetchUser().then(data=>{
-            this.isLoading = false
-            this.auth.deleteToken().then(()=>{ 
-                this.auth.fetchUser()
-            })
-        }).catch(err=>{
-            this.isLoading = false
-            this.shared.set('login')
-        })
-
+        this.shared.set('login')
     }
     toggle(){
         this.navToggle = !this.navToggle
         this.shared.set({ state: 'sidenav', val: this.navToggle })
+    }
+    dropdownToggle(){
+        this.dropdownOpen = !this.dropdownOpen
     }
 }

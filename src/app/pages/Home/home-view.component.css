@@ -33,6 +33,11 @@
   box-shadow: 0 1px 7px rgba(0,0,0,.05) !important;
   border-radius: 3px;
 }
+.card:hover{
+  -ms-transform: scale(1.03, 1.03); /* IE 9 */
+  -webkit-transform: scale(1.03, 1.03); /* Safari */
+  transform: scale(1.03, 1.03);
+}
 .card img{
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;

@@ -12,11 +12,6 @@ a{
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
-.card:hover{
-  -ms-transform: scale(1.03, 1.03); /* IE 9 */
-  -webkit-transform: scale(1.03, 1.03); /* Safari */
-  transform: scale(1.03, 1.03);
-}
 .myLogo{
   padding-right:5px;
   padding-left:6px;

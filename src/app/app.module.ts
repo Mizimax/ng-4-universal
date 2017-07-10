@@ -23,6 +23,7 @@ import { LoginComponent } from './components/Modal/Login/login.component';
 import { PostComponent } from './components/Modal/Post/post.component';
 import { ArticleComponent } from './pages/Article/article.component';
 import { FooterComponent } from './components/Footer/footer.component';
+import { ProfileComponent } from "./pages/Profile/Profile.component";
 
 /* Service */
 import { SharedService } from './services/shared.service';
@@ -42,6 +43,7 @@ import { AuthService } from './services/auth.service';
 		  { path: 'blog', component: BlogComponent},
 	      { path: 'blog/search', component: BlogComponent},
 	      { path: 'blog/:name', component: ArticleComponent},
+		  { path: 'profile/:name', component: ProfileComponent},
 	      { path: 'contact', component: ContactComponent}
 	    ])
 	],
@@ -61,7 +63,8 @@ import { AuthService } from './services/auth.service';
 		SideArticleComponent,
 		CommentComponent,
 		FooterComponent,
-		SideNavComponent
+		SideNavComponent,
+		ProfileComponent
 	],
     providers: [ AuthService, SharedService ],
     exports: [ AppComponent ]

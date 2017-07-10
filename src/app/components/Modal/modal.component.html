@@ -1,9 +1,8 @@
 <div class="modal" [ngClass]="{'is-active': isOpened}">
-  <div class="modal-background" style="z-index: 100; background:rgba(0,0,0,0.6)" (click)="isOpened=false"></div>
+  <div class="modal-background" style="z-index: 100; background:rgba(0,0,0,0.6)" (click)="modalClose()"></div>
   <div class="box" style="background-color:white; z-index:999">
-    <div class="modal-content" style="margin:0; overflow:hidden">
-      <button class="delete" (click)="isOpened=false" style="position:absolute;top:0px;right:0px;"></button>
-      <login *ngIf="event==='login'"></login>
+    <div class="modal-content" style="margin:0; overflow:hidden"  [ngClass]="{'loading': authLoading}">
+      <login (event)="authLoading = false" *ngIf="event==='login'"></login>
       <!--<regis *ngIf="event==='login'"></regis>-->
       <post *ngIf="event==='post'"></post>
     </div>

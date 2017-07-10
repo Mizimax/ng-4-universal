@@ -29,13 +29,41 @@
       </a>
     </div>
     <div class="nav-right nav-menu">
-      <a class="nav-item" (click)="modalOpen()">
-        <span *ngIf="isLoading" class="loader is-hidden-touch" style="margin-right:34px; margin-left:19px"></span>
-        <span *ngIf="!isLoading" class="is-hidden-touch" style="margin-right:13px; font-size:15px; color:orange">Member</span>
-        <span class="icon">
-          <i class="fa fa-user-circle" style="font-size:20px;color:#555"></i>
-        </span>
-      </a>
+      <div class="has-dropdown">
+        <a class="nav-item nav-icon" (click)="dropdownToggle()">
+          <span class="icon">
+            <i class="fa fa-search" style="font-size:20px;color:#555"></i>
+          </span>
+        </a>
+        <div class="dropdown" [ngClass]="{'show': dropdownOpen}">
+          <div class="card">
+            <div class="dropdown-content">
+              <div class="field has-addons" style="justify-content:center;">
+                <p class="control">
+                    <input class="input" type="text" [(ngModel)]="searchTxt" placeholder="Search...">
+                </p>
+                <p class="control">
+                    <a class="button" [routerLink]="['/blog']" [queryParams]="{search: searchTxt, page: 1}">
+                    Search
+                    </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="has-dropdown">
+        <a class="nav-item nav-icon" (click)="modalOpen()">
+          <span class="icon">
+            <i class="fa fa-user-circle" style="font-size:20px;color:#555"></i>
+          </span>
+        </a>
+        <div class="dropdown">
+          <div class="card">
+            555
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </nav>

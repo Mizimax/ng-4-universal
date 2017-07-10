@@ -34,6 +34,11 @@
 .no-result p{
     transform: translateY(-200%);
 }
+.card:hover{
+  -ms-transform: scale(1.03, 1.03); /* IE 9 */
+  -webkit-transform: scale(1.03, 1.03); /* Safari */
+  transform: scale(1.03, 1.03);
+}
 @media (max-width: 768px){
     .category{
         text-align:center;

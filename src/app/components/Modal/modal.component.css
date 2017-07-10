@@ -4,6 +4,9 @@
     opacity: 0;
     transition: all .2s ease;
 }
+.modal-content.loading{
+    width:30px;
+}
 .box{
     transform: translateY(-10px);
     transition: transform .1s linear;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TransferHttp } from '../../../../modules/transfer-http/transfer-http';
@@ -12,13 +12,25 @@ import { SharedService } from '../../../services/shared.service';
 })
 export class LoginComponent implements OnInit {
 
+    @Output() event = new EventEmitter();
+
     public isLoading : Boolean = false
+    public authLoading : Boolean = false
     public errMsg: String = ''
     private loginSubs: Subscription
 
     constructor(private http:TransferHttp, private auth: AuthService, private shared: SharedService) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.authLoading = true
+        this.auth.fetchUser().then(data=>{
+            this.auth.deleteToken()
+            this.shared.set('modalClose')
+        }).catch(err=>{
+            this.event.emit()
+            this.authLoading = false
+        })
+    }
 
     onSubmit(form : any){
         this.loginSubs = this.http.post('https://maxangeiei.herokuapp.com/api/v1/user/login', form).subscribe(data=>{

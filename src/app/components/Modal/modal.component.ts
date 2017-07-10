@@ -1,7 +1,7 @@
+import { Component, OnInit } from '@angular/core';
+
 import { SharedService } from '../../services/shared.service';
 import { TransferHttp } from '../../../modules/transfer-http/transfer-http';
-import { Component, OnInit } from '@angular/core';
-import { AuthService} from '../../services/auth.service'
 
 @Component({
     selector: 'max-modal',
@@ -10,6 +10,7 @@ import { AuthService} from '../../services/auth.service'
 })
 export class ModalComponent implements OnInit {
 
+    public authLoading: Boolean = true
     public isOpened: Boolean = false
     public event: String
 
@@ -29,11 +30,20 @@ export class ModalComponent implements OnInit {
                 this.isOpened = true
                 this.event = data
             }else if(data==='modalClose'){
-                this.isOpened = false
+                this.modalClose()
             }
             
         })
     }
+
+    modalClose(){
+        this.isOpened = false
+        setTimeout(()=>{
+            this.event = ''
+            this.authLoading = true
+        }, 200)
+    }
+    
     ngOnDestroy(){
         if(this.sharedSubs)
             this.sharedSubs.unsubscribe()
