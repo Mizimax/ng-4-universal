@@ -13,8 +13,8 @@
       </div>
   </form>
   <br><br>
-  <p class="title is-4">ความคิดเห็น</p>
-  <div class="comment" *ngFor="let comment of comments; let i = index">
+  <p class="title is-4"><span *ngIf="!allComment">ยังไม่มี</span>ความคิดเห็น</p>
+  <div #allComment class="comment" *ngFor="let comment of comments; let i = index">
       <div class="card">
           <div class="card-content" style="padding:1em">
               <div class="commentId">ความคิดเห็นที่ {{ i+1 }}</div>

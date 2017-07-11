@@ -44,7 +44,7 @@ a:hover .description{
 @media (max-width: 768px){
     .article{
         flex-direction: column;
-        padding: 15px;
+        padding: 10px;
     }
     .article .column{
         text-align: center;
@@ -59,7 +59,7 @@ a:hover .description{
     }
     .image{
         width: auto;
-        height: auto;
+        height: 130px;
     }
     #facebook{
         display: none;

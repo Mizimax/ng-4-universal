@@ -4,18 +4,18 @@
         <div class="myContainer" *ngIf="!isLoading">
             <div class="columns">
                 <div class="column is-three-quarters" style="margin-top:50px">
-                    <h1 class="title is-3">{{article.topic}}</h1>
+                    <h1 class="title is-4"><span class="tab"></span>{{article.topic}}</h1>
                     <hr>
-                    <div class="addthis_inline_share_toolbox"></div>
+                    <div class="addthis_inline_share_toolbox" align="center"></div>
                     <hr>
                     <div class="content">
                         <figure class="image">
                             <img style="height:50vh" src="static/{{article.pic}}" alt="{{ article.topic }}">
                         </figure>
                         <br>
-                        <h2 class="title is-4" align="center">{{ article.sub_title }}</h2>
+                        <h2 class="title is-5" align="center">{{ article.sub_title }}</h2>
                         <div class="content is-6" style="padding:20px">
-                            <span class="tab"></span>{{ article.content }}
+                            <span class="tab content"></span>{{ article.content }}
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,6 @@
             </div>
             <max-comment [topic]="topic"></max-comment>
         </div>
-        <div id="sharedButton"></div>
     </div>
 </div>
 <max-footer *ngIf="!isLoading"></max-footer>

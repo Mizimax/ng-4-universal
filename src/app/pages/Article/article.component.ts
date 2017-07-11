@@ -46,7 +46,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
                             this.sharedRender()
                         }
                         this.title.setTitle(data.topic+' - Mizimax.com')
-                        this.meta.updateTag({ name: 'description', content: data.topic+' - Mizimax.com' })
+                        this.meta.updateTag({ name: 'description', content: data.topic })
                         this.meta.updateTag({ name: 'keywords', content: data.tags || ' ' })
                         this.meta.updateTag({ name: 'og:url', content: 'https://mizimax.com/blog/'+param.name })
                         this.meta.updateTag({ name: 'og:type', content: 'website' })
@@ -59,10 +59,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     sharedRender(){
-        let doc = <HTMLDivElement>document.getElementById('sharedButton')
-        let script = document.createElement('script')
-        script.src = '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5963e1d731552d8a'
-        doc.appendChild(script)
+        (<any>window).addthis.layers.refresh()
     }
 
     ngOnDestroy() {

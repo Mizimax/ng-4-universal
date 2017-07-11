@@ -4,6 +4,9 @@ body{
 a{
   color:orange;
 }
+span.tab{
+  margin-left:20px;
+}
 .card.animate{
   border-radius: 3px;
   transition: all .3s;

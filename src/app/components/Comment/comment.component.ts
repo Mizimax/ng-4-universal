@@ -74,7 +74,6 @@ export class CommentComponent implements OnInit, OnDestroy {
         doc.appendChild(script)
     }
 
-
     verifyCallback(response){
         this.captchaResponse = response
     }
