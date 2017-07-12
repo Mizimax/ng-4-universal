@@ -18,24 +18,13 @@
                         <div class="card animate">
                             <div class="card-image">
                                 <figure class="image is-4by3">
-                                <img [src]="'static/'+article.pic" alt="Image">
+                                <img [src]="'static/imgs/blog/'+article.pic" alt="Image">
                                 </figure>
                             </div>
                             <div class="card-content" style="padding:1em">
                                 <div class="content">
                                     <h2 class="title is-5">{{ article.topic }}</h2>
                                 </div>
-                                <!--<div class="media">
-                                <div class="media-left">
-                                    <figure class="image is-48x48">
-                                    <img style="border-radius: 50%" src="static/imgs/user/{{ article.created_by }}.jpg" alt="Image">
-                                    </figure>
-                                </div>
-                                <div class="media-content" style="margin-top:3px">
-                                    <p style="font-weight:400;padding-bottom:3px; font-size:14px"><b>โพสโดย : </b>{{ article.created_by }}</p>
-                                    <p class="subtitle" style="font-size:12px"><b>เวลา : </b>{{ article.created_at | date:'medium' }}</p>
-                                </div>
-                                </div>-->
                             </div>
                         </div>
                     </a>
