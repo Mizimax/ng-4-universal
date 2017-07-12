@@ -12,7 +12,7 @@
           <div class="columns article">
             <div class="column is-64px">
               <figure class="image">
-                <img height="100%" width="100%" [src]="'static/'+latestArticle.pic">
+                <img height="100%" width="100%" [src]="'static/imgs/blog/'+latestArticle.pic">
               </figure>
             </div>
             <div class="column"><p class="description">{{ latestArticle.topic | slice:0:35 }}{{ (latestArticle.topic.length > 35) ? '...' : '' }}</p></div>
@@ -39,7 +39,7 @@
           <div class="columns article">
             <div class="column is-64px">
               <figure class="image">
-                <img height="100%" width="100%" [src]="'static/'+relatedArticle.pic">
+                <img height="100%" width="100%" [src]="'static/imgs/blog/'+relatedArticle.pic">
               </figure>
             </div>
             <div class="column"><p class="description">{{ relatedArticle.topic | slice:0:35 }}{{ (relatedArticle.topic.length > 35) ? '...' : '' }}</p></div>

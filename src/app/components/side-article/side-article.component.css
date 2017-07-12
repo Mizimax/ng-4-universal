@@ -58,7 +58,13 @@ a:hover .description{
         padding:5px;
     }
     .image{
-        width: auto;
+        display: block;
+        margin: 0 auto;
+        min-width: 200px;
+        height: 130px;
+    }
+    .image img{
+        min-width: 200px;
         height: 130px;
     }
     #facebook{
