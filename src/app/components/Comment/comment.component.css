@@ -7,6 +7,16 @@
     color:#888;
     margin-bottom:20px;
 }
+.commentDetail{
+    width:250px;
+    position:absolute;
+    right:1em;
+    bottom:1em;
+}
+.content{
+    word-break:break-all;
+    margin-bottom: 40px;
+}
 .image.is-40x40 {
     height: 40px;
     width: 40px;

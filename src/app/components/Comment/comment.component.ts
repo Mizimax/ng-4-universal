@@ -48,7 +48,7 @@ export class CommentComponent implements OnInit, OnDestroy {
     }
 
     addComment(form): void{
-        let url = 'https://maxangeiei.herokuapp.com/api/v1/blog/'+this.topic+'/comments';
+        let url = 'https://maxangeiei.herokuapp.com/api/v1/blog/'+this.topic.getValue()+'/comments';
         let data = { comment: form.commentText,
                      created_by: this.auth.getLastUser().name,
                      captcha: this.captchaResponse }

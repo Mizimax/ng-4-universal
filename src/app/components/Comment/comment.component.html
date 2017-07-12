@@ -13,25 +13,25 @@
       </div>
   </form>
   <br><br>
-  <p class="title is-4"><span *ngIf="!allComment">ยังไม่มี</span>ความคิดเห็น</p>
-  <div #allComment class="comment" *ngFor="let comment of comments; let i = index">
+  <p class="title is-4"><span *ngIf="comments?.length === 0">ยังไม่มี</span>ความคิดเห็น</p>
+  <div class="comment" *ngFor="let comment of comments; let i = index">
       <div class="card">
           <div class="card-content" style="padding:1em">
               <div class="commentId">ความคิดเห็นที่ {{ i+1 }}</div>
               <div class="content">
                   <p style="font-size:16px;">{{ comment.comment }}</p>
               </div>
-              <div class="media">
-                  <div class="media-left">
-                      <figure class="image is-40x40">
-                      <img style="border-radius: 50%" src="static/imgs/user/{{ comment.created_by }}.jpg" alt="Image">
-                      </figure>
+              <div class="media commentDetail">
+                    <div class="media-content" >
+                        <p style="font-weight:500;padding-bottom:3px;font-size:14px;text-align:right">{{ comment.created_by }}</p>
+                        <p class="subtitle" style="font-size:12px;text-align:right">{{ comment.created_at | date:'medium' }}</p>
+                    </div>
+                    <div class="media-right">
+                        <figure class="image is-40x40">
+                        <img style="border-radius: 50%" src="static/imgs/user/{{ comment.created_by }}.jpg" alt="Image">
+                        </figure>
+                    </div>
                   </div>
-                  <div class="media-content" >
-                      <p style="font-weight:400;padding-bottom:3px;font-size:14px">{{ comment.created_by }}</p>
-                      <p class="subtitle" style="font-size:12px">{{ comment.created_at | date:'medium' }}</p>
-                  </div>
-              </div>
           </div>
       </div>
   </div>
