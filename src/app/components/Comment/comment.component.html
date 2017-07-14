@@ -1,11 +1,9 @@
 <div id="comment">
   <hr>
-  <form #form="ngForm" (ngSubmit)="addComment(form.value)">
+  <form (ngSubmit)="addComment()">
       <div class="field">
           <label class="label">Message</label>
-          <p class="control">
-              <textarea class="textarea" placeholder="แสดงความคิดเห็น" name="commentText" ngModel required></textarea>
-          </p>
+          <div id="pell" class="pell"></div>
       </div>
       <div id="submit" style="height:74px">
           <div class="g-recaptcha" data-sitekey="6LfxASUUAAAAAAcl1piDOzqbOvzYEVSviWSGGl1q" data-callback="verifyCallback" style="float:left"></div>
@@ -18,8 +16,7 @@
       <div class="card">
           <div class="card-content" style="padding:1em">
               <div class="commentId">ความคิดเห็นที่ {{ i+1 }}</div>
-              <div class="content">
-                  <p style="font-size:16px;">{{ comment.comment }}</p>
+              <div [innerHTML]="comment.comment" class="content">
               </div>
               <div class="media commentDetail">
                     <div class="media-content" >

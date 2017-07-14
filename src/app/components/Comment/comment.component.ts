@@ -8,6 +8,8 @@ import { AuthService } from '../../services/auth.service'
 
 import { Comment } from '../../models/Article'
 
+import pell from 'pell'
+
 @Component({
     selector: 'max-comment',
     templateUrl: './comment.component.html',
@@ -29,6 +31,9 @@ export class CommentComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
+    	pell.init(({
+		  root: 'pell'
+		}))
         if(typeof window !== 'undefined'){
             window['verifyCallback'] = this.verifyCallback.bind(this);
             this.render()
@@ -47,16 +52,17 @@ export class CommentComponent implements OnInit, OnDestroy {
             })
     }
 
-    addComment(form): void{
+    addComment(): void{
+    	let formText = document.getElementsByClassName('pell-editor')[0].innerHTML
         let url = 'https://maxangeiei.herokuapp.com/api/v1/blog/'+this.topic.getValue()+'/comments';
-        let data = { comment: form.commentText,
+        let data = { comment: formText,
                      created_by: this.auth.getLastUser().name,
                      captcha: this.captchaResponse }
 
         this.http.post(url, data)
            .subscribe(data=>{
                 this.comments.push({
-                    comment: form.commentText,
+                    comment: formText,
                     created_by: this.auth.getLastUser().name,
                     created_at: new Date(),
                     updated_at: new Date()
