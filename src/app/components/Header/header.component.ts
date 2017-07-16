@@ -37,8 +37,8 @@ export class HeaderComponent implements OnInit {
     }
 
     onClick(event) {
-    if (!this.elem.nativeElement.contains(event.target)) // or some similar check
-        this.dropdownOpen = false
+        if (!this.elem.nativeElement.contains(event.target))
+            this.dropdownOpen = false
     }
 
     modalOpen(){

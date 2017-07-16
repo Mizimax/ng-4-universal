@@ -23,7 +23,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     public tag = new BehaviorSubject<string>('')
     public topic = new BehaviorSubject<string>('')
 
-    private subscriptions : Subscription = new Subscription()
+    private subscriptions : Array<Subscription> = []
 
     constructor(
         private http: TransferHttp,
@@ -33,7 +33,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.subscriptions.add(
+        this.subscriptions['params'] = 
             this.route.params.subscribe(param=>{
                 this.isLoading = true
                 this.topic.next(param.name)
@@ -55,7 +55,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
                         this.meta.updateTag({ name: 'og:image', content: 'https://mizimax.com/static/imgs/'+data.pic })
                     })
             })
-        )
     }
 
     sharedRender(){
@@ -63,6 +62,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.subscriptions.unsubscribe()
+        this.subscriptions.forEach(subs=>{
+            subs.unsubscribe()
+        })
     }
 }

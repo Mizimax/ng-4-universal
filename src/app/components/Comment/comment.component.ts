@@ -23,7 +23,7 @@ export class CommentComponent implements OnInit, OnDestroy {
 
     private captchaResponse: any
 
-	private subscriptions: Subscription = new Subscription()
+	private subscriptions: Array<Subscription> = []
 
     constructor(
         private http: TransferHttp,
@@ -31,18 +31,17 @@ export class CommentComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-    	pell.init(({
-		  root: 'pell'
-		}))
         if(typeof window !== 'undefined'){
+            pell.init(({
+                root: 'pell'
+            }))
             window['verifyCallback'] = this.verifyCallback.bind(this);
             this.render()
         }
-        this.subscriptions.add(
+        this.subscriptions['topic'] =
             this.topic.subscribe(val=>{
                 this.loadComment(val)
             })
-        )
     }
 
     loadComment(topic){
@@ -85,6 +84,8 @@ export class CommentComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(){
-        this.subscriptions.unsubscribe()
+        this.subscriptions.forEach(subs=>{
+            subs.unsubscribe()
+        })
     } 
 }

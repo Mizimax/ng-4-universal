@@ -28,15 +28,13 @@ app.set('views', 'src');
 app.use(compression());
 app.use('/static', express.static('dist/static', { index: false, maxAge: 1 * 365 * 24 * 60 * 60 * 1000 }));
 
-ROUTES.forEach(route => {
-  app.get(route, (req, res) => {
-    console.time(`GET: ${req.originalUrl}`);
-    res.render('../dist/index', {
-      req: req,
-      res: res
-    });
-    console.timeEnd(`GET: ${req.originalUrl}`);
+app.get('**', (req, res) => {
+  console.time(`GET: ${req.originalUrl}`);
+  res.render('../dist/index', {
+    req: req,
+    res: res
   });
+  console.timeEnd(`GET: ${req.originalUrl}`);
 });
 
 // const options = {

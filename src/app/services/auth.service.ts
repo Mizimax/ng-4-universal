@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Headers, Http, RequestOptions, RequestOptionsArgs } from '@angular/http';
 
 import { Profile } from '../models/Profile';
 
@@ -18,7 +18,7 @@ export class AuthService {
     fetchUser(){
         if (typeof window !== 'undefined'){
             return new Promise((resolve,reject)=>{
-            this.subs = this.http.get('https://maxangeiei.herokuapp.com/api/v1/user/me?token='+this.getToken().token)
+            this.subs = this.http.get('https://maxangeiei.herokuapp.com/api/v1/user/me', this.getTokenOption())
                                 .map(data=>data.json())
                                 .catch(error=> Observable.throw(error.json()))
                                 .subscribe(data=>{
@@ -31,19 +31,35 @@ export class AuthService {
             })
         }
     }
+
     getUser() : Observable<any> {
         return this.userData.asObservable();
     }
+
     getLastUser() : Profile
     {
         return this.userData.getValue() || new Profile()
     }
-    getToken(){
+
+    getToken(): string {
         if (typeof window !== 'undefined'){
-            var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            try{
+                var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            }catch(e){
+                return ''
+            }
+            return currentUser.token
         }
-        return currentUser || ''
+        return ''
     }
+
+    getTokenOption(): RequestOptionsArgs{
+        let headers = new Headers()
+        headers.append('x-access-token', this.getToken())
+        let options = new RequestOptions({ headers: headers })
+        return options
+    }
+    
     setToken(user, token){
         return new Promise((resolve)=>{
             if (typeof window !== 'undefined')
@@ -51,6 +67,7 @@ export class AuthService {
             resolve()
         })
     }
+
     deleteToken(){
         return new Promise((resolve)=>{
             if (typeof window !== 'undefined')

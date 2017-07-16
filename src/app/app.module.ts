@@ -14,7 +14,8 @@ import { CommentComponent } from './components/Comment/comment.component';
 import { SideNavComponent } from './components/Sidenav/sidenav.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { ContactComponent } from './pages/Contact/contact.component';
-import { BlogComponent } from './pages/Blog/blog.component';
+import { BlogComponent } from './pages/BlogSearch/blog.component';
+import { BlogListComponent } from './pages/BlogList/BlogList.component';
 import { ProjectComponent } from './pages/Project/project.component';
 import { ModalComponent } from './components/Modal/modal.component';
 import { HomeView } from './pages/Home/home-view.component';
@@ -23,11 +24,13 @@ import { LoginComponent } from './components/Modal/Login/login.component';
 import { PostComponent } from './components/Modal/Post/post.component';
 import { ArticleComponent } from './pages/Article/article.component';
 import { FooterComponent } from './components/Footer/footer.component';
+import { ShowArticleComponent } from './components/showArticle/showArticle.component';
 import { ProfileComponent } from "./pages/Profile/Profile.component";
 
 /* Service */
 import { SharedService } from './services/shared.service';
 import { AuthService } from './services/auth.service';
+
 
 @NgModule({
 	imports: [
@@ -39,11 +42,24 @@ import { AuthService } from './services/auth.service';
 	    RouterModule.forRoot([
 	      { path: '', component: HomeView},
 	      { path: 'about', component: AboutView},
-	      { path: 'exp', component: ProjectComponent},
-	      { path: 'blog/search', component: BlogComponent},
-	      { path: 'blog/:name', component: ArticleComponent},
-		  { path: 'profile/:name', component: ProfileComponent},
-	      { path: 'contact', component: ContactComponent}
+		  { path: 'exp', component: ProjectComponent},
+		  { 
+			path: 'blog',
+			component: BlogListComponent,
+			children: [
+				{ path: 'search', component: BlogComponent},
+				{ path: ':name', component: ArticleComponent}
+			]
+		  },
+		  { 
+			path: 'profile/:name',
+			component: ProfileComponent,
+			children: [
+				{ path: 'edit', component: ProfileComponent}
+			]
+		  },
+		  { path: 'contact', component: ContactComponent},
+		  { path: '**', component: HomeView } //404 page
 	    ])
 	],
 	declarations: [ 
@@ -63,7 +79,9 @@ import { AuthService } from './services/auth.service';
 		CommentComponent,
 		FooterComponent,
 		SideNavComponent,
-		ProfileComponent
+		ProfileComponent,
+		ShowArticleComponent,
+		BlogListComponent
 	],
     providers: [ AuthService, SharedService ],
     exports: [ AppComponent ]

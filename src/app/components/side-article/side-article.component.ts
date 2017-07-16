@@ -21,28 +21,32 @@ export class SideArticleComponent implements OnInit, OnDestroy {
     public latestArticles: Article[]
     public relatedArticles: Article[]
 
-    private subscriptions: Subscription = new Subscription()
+    private subscriptions: Array<Subscription> = []
 
     constructor(private http: TransferHttp, private shared: SharedService) { 
     }
     ngOnInit() {
-        this.subscriptions.add(
-            this.tag.subscribe(val=>{
-                this.loadSideArticle(val)
-            })
-        )
-    }
-    loadSideArticle(tag){
         this.http.get('https://maxangeiei.herokuapp.com/api/v1/blogs?sort=-$natural&limit=3')
           .subscribe((data:Article[])=>{
             this.latestArticles = data
           })
+        this.subscriptions['tag'] = 
+            this.tag.subscribe(val=>{
+                if(typeof window !== 'undefined')
+                    this.loadSideArticle(val)
+            })
+    }
+
+    loadSideArticle(tag){
         this.http.get('https://maxangeiei.herokuapp.com/api/v1/blogs?tag='+ tag +'&limit=3')
           .subscribe((data:Article[])=>{
             this.relatedArticles = data
           })
     }
+        
     ngOnDestroy() {
-        this.subscriptions.unsubscribe()
+        this.subscriptions.forEach(subs=>{
+            subs.unsubscribe()
+        })
     }
 }

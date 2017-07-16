@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <hr>
-                <div class="no-result" *ngIf="!isLoading && Articles.length === 0"><p>No Result...</p></div>
+                <div class="no-result" *ngIf="!isLoading && Articles?.length === 0"><p>No Result...</p></div>
                 <loading [height]="400" *ngIf="isLoading"></loading>
                 <div *ngIf="!isLoading">
                 <div class="articles">

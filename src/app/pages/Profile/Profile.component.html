@@ -1,1 +1,34 @@
-<Label class="Profile" text="Hello ProfileComponent!"></Label>
+<div id="profile" class="section" *ngIf="userProfile.email">
+    <div class="container">
+        <div class="myContainer" style="margin-top: 50px;">
+            <div class="profile-header columns">
+                <div class="column is-one-quarter">
+                    <div class="image-container">
+                        <img class="image" src='static/imgs/user/{{userProfile.name}}' alt="{{userProfile.name}}">
+                        <button *ngIf="itsMe" class="button is-primary" style="width:100%">Edit Picture</button>
+                    </div>
+                </div>
+                <div id="profile-detail" class="column" style="position:relative">
+                    <button class="button is-primary top-right" (click)="logout()" *ngIf="itsMe">Logout</button>
+                    <h1 class="name">{{ userProfile.name }}</h1>
+                    <p class="username">@{{ userProfile.username }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="userProfile.email">
+    <div class="myContainer">
+        <div class="profile-content">
+            <div class="tabs is-centered">
+                <ul>
+                    <li class="is-active"><a>About</a></li>
+                    <li><a>Activities</a></li>
+                    <li><a>Edit Profile</a></li>
+                    <li><a>PM</a></li>
+                </ul>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

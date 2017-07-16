@@ -7,6 +7,7 @@
   <div class="card-content">
     <div class="content">
       <div class="columns articles">
+        <loading [height]="130" [size]="1" *ngIf="!latestArticles"></loading>
         <div class="column" *ngFor="let latestArticle of latestArticles" >
         <a routerLink="/blog/{{ latestArticle.name }}">
           <div class="columns article">

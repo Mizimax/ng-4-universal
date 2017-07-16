@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { Router } from '@angular/router';
 
 import { TransferHttp } from '../../../../modules/transfer-http/transfer-http';
 import { AuthService } from '../../../services/auth.service';
@@ -19,12 +20,12 @@ export class LoginComponent implements OnInit {
     public errMsg: String = ''
     private loginSubs: Subscription
 
-    constructor(private http:TransferHttp, private auth: AuthService, private shared: SharedService) { }
+    constructor(private http:TransferHttp, private auth: AuthService, private shared: SharedService, private router: Router) { }
 
     ngOnInit() {
         this.authLoading = true
         this.auth.fetchUser().then(data=>{
-            this.auth.deleteToken()
+            this.router.navigate(['profile', 'me'])
             this.shared.set('modalClose')
         }).catch(err=>{
             this.event.emit()

@@ -12,3 +12,11 @@
   flex-direction: row;
   justify-content: space-between;
 }
+a.icon{
+  color:white;
+  margin-right:6px;
+  margin-left:6px;
+}
+a.icon:hover{
+  color:orange;
+}

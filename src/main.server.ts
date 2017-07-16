@@ -20,8 +20,7 @@ app.set('views', 'src');
 
 app.use('/static', express.static('dist/static', {index: false}));
 
-ROUTES.forEach(route => {
-  app.get(route, (req, res) => {
+  app.get('**', (req, res) => {
     console.time(`GET: ${req.originalUrl}`);
     res.render('../dist/index', {
       req: req,
@@ -29,7 +28,6 @@ ROUTES.forEach(route => {
     });
     console.timeEnd(`GET: ${req.originalUrl}`);
   });
-});
 
 app.listen(8000,() => {
 	console.log(`Listening at ${baseUrl}`);

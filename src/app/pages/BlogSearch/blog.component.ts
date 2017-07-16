@@ -31,7 +31,7 @@ export class BlogComponent implements OnInit {
 
   private navTimeOut : any
   private limit : number = 9
-  private subscriptions : object = {}
+  private subscriptions : Array<Subscription> = []
 
   constructor(
     private http:TransferHttp,
@@ -123,13 +123,9 @@ export class BlogComponent implements OnInit {
     return this.category!==category
   }
 
-  open(){
-    this.shared.set('post')
-  }
-
   ngOnDestroy() {
-    Object.keys(this.subscriptions).forEach(subs=>{
-      this.subscriptions[subs].unsubscribe()
+    this.subscriptions.forEach(subs=>{
+      subs.unsubscribe()
     })
   }
 }
