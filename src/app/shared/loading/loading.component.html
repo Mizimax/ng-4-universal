@@ -1,6 +1,10 @@
 <div class="myLoading" [ngStyle]="{'height': height}">
-    <div class="loading">
+    <div class="loading" align="center">
         <div class="loader" [ngStyle]="{'height': size+'em', 'width': size+'em'}">
+        </div>
+        <div class="text" *ngIf="text">
+        <br>
+        {{ text }}
         </div>
     </div>
 </div>

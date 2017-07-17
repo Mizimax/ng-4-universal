@@ -6,19 +6,19 @@
                     <div class="column is-one-quarter" align="center">
                         <h3 class="title is-3">All Articles</h3>
                     </div>
-                    <div class="column category" align="right" style="margin-top:8px;">
-                        <a class="button is-info" [ngClass]="{'is-outlined': activeCategory('all')}" [routerLink]="['/blog', 'search']" [queryParams]="{page: 1}">All</a>
-                        <a class="button is-info" [ngClass]="{'is-outlined': activeCategory('web')}"  [routerLink]="['/blog', 'search']" [queryParams]="{category: 'web', page: 1}">Web</a>
-                        <a class="button is-info" [ngClass]="{'is-outlined': activeCategory('mobile')}" [routerLink]="['/blog', 'search']" [queryParams]="{category: 'mobile', page: 1}">Mobile</a>
-                        <a class="button is-info" [ngClass]="{'is-outlined': activeCategory('tech')}" [routerLink]="['/blog', 'search']" [queryParams]="{category: 'tech', page: 1}">Technology</a>
+                    <div class="column category" align="center" style="margin-top:8px;">
+                        <a class="button" [ngClass]="{'is-primary': activeCategory('')}" [routerLink]="['/blog', 'search']" [queryParams]="{page: 1}">All</a>
+                        <a class="button" [ngClass]="{'is-primary': activeCategory('web')}"  [routerLink]="['/blog', 'search']" [queryParams]="{category: 'web', page: 1}">Web</a>
+                        <a class="button" [ngClass]="{'is-primary': activeCategory('mobile')}" [routerLink]="['/blog', 'search']" [queryParams]="{category: 'mobile', page: 1}">Mobile</a>
+                        <a class="button" [ngClass]="{'is-primary': activeCategory('tech')}" [routerLink]="['/blog', 'search']" [queryParams]="{category: 'tech', page: 1}">Technology</a>
                     </div>
-                    <div class="column" style="margin-top:8px;" align="center">
+                    <div class="column is-one-quarter" style="margin-top:8px;" align="center">
                         <div class="field has-addons" style="justify-content:center;">
                         <p class="control">
                             <input class="input" type="text" placeholder="Find a article" [(ngModel)]="searchWord" (ngModelChange)="searchChange()">
                         </p>
                         <p class="control">
-                            <a class="button" (click)="search()">
+                            <a class="button is-primary" (click)="search()">
                             <span class="icon">
                                 <i class="fa fa-search"></i>
                             </span>

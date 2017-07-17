@@ -1,5 +1,5 @@
-<div id="profile" class="section" *ngIf="userProfile.email">
-    <div class="container">
+<div id="profile" class="section">
+    <div class="container" *ngIf="userProfile.email">
         <div class="myContainer" style="margin-top: 50px;">
             <div class="profile-header columns">
                 <div class="column is-one-quarter">
@@ -15,20 +15,17 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="container" *ngIf="userProfile.email">
-    <div class="myContainer">
         <div class="profile-content">
             <div class="tabs is-centered">
                 <ul>
-                    <li class="is-active"><a>About</a></li>
-                    <li><a>Activities</a></li>
-                    <li><a>Edit Profile</a></li>
-                    <li><a>PM</a></li>
+                    <li><a routerLink="./" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">About</a></li>
+                    <li><a routerLink="activities" routerLinkActive="is-active">Activities</a></li>
+                    <li *ngIf="itsMe"><a routerLink="edit" routerLinkActive="is-active">Edit Profile</a></li>
+                    <li><a routerLink="pm" routerLinkActive="is-active">PM</a></li>
                 </ul>
             </div>
             <router-outlet></router-outlet>
         </div>
     </div>
+    <loading *ngIf="!userProfile.email" [height]="400" [text]="'Checking Authentication...'"></loading>
 </div>

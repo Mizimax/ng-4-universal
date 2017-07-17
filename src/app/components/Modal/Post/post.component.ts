@@ -22,7 +22,7 @@ export class PostComponent implements OnInit {
     }
 
     onSubmit(form : any){
-        this.postSubs = this.http.post('https://maxangeiei.herokuapp.com/api/v1/blogs?token='+this.auth.getToken().token, form)
+        this.postSubs = this.http.post('https://maxangeiei.herokuapp.com/api/v1/blogs?token='+this.auth.getToken(), form)
             .subscribe(data=>{
                 this.isLoading = false
                 this.shared.set('modalClose')

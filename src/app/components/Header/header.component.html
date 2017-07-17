@@ -40,7 +40,7 @@
                     <input class="input" type="text" [(ngModel)]="searchTxt" placeholder="Search...">
                 </p>
                 <p class="control">
-                    <a class="button" (click)="dropdownOpen = false" [routerLink]="['blog','search']" [queryParams]="{search: searchTxt || '', page: 1}">
+                    <a class="button is-primary" (click)="dropdownOpen = false" [routerLink]="['blog','search']" [queryParams]="{search: searchTxt || '', page: 1}">
                       <span class="icon">
                         <i class="fa fa-search"></i>
                       </span>

@@ -39,12 +39,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
 					this.itsMe = true
 					if(typeof window !== 'undefined'){
 						if(!this.auth.getLastUser().email){
-							this.shared.set('login')
-							this.subscriptions['user'] = 
-								this.auth.getUser().subscribe(user=>{
-									if(user)
-										this.userProfile = user
-								})
+							this.auth.fetchUser().then((user: Profile)=>{
+								this.userProfile = user
+							}, err=>{
+								this.router.navigate(['/'])
+							})
 						}
 						else{
 							this.userProfile = this.auth.getLastUser()
@@ -52,8 +51,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
 					}
 				}else{
 					if(typeof window !== 'undefined'){
-						if(param.name == JSON.parse(localStorage.getItem('currentUser')).name){
-							this.router.navigate(['profile', 'me'])
+						try{			
+							let name = JSON.parse(localStorage.getItem('currentUser')).name
+						}catch(e){
+							console.log(e)
+						}
+						if(param.name === name){
+							
 						}else{
 							let url = 'https://maxangeiei.herokuapp.com/api/v1/user/' + param.name
 							this.http.get(url).subscribe((data: Profile)=>{
@@ -69,6 +73,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 	logout(){
 		this.auth.deleteToken().then(()=>{
+			this.auth.fetchUser()
 			this.router.navigate(['/'])
 		})
 	}

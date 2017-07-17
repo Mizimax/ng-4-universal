@@ -26,6 +26,10 @@ import { ArticleComponent } from './pages/Article/article.component';
 import { FooterComponent } from './components/Footer/footer.component';
 import { ShowArticleComponent } from './components/showArticle/showArticle.component';
 import { ProfileComponent } from "./pages/Profile/Profile.component";
+import { AboutComponent } from "./pages/Profile/About/About.component";
+import { ActivityComponent } from "./pages/Profile/Activity/Activity.component";
+import { EditComponent } from "./pages/Profile/edit/edit.component";
+import { PmComponent } from "./pages/Profile/pm/pm.component";
 
 /* Service */
 import { SharedService } from './services/shared.service';
@@ -45,8 +49,8 @@ import { AuthService } from './services/auth.service';
 		  { path: 'exp', component: ProjectComponent},
 		  { 
 			path: 'blog',
-			component: BlogListComponent,
 			children: [
+				{ path: '', component: BlogListComponent},
 				{ path: 'search', component: BlogComponent},
 				{ path: ':name', component: ArticleComponent}
 			]
@@ -55,7 +59,10 @@ import { AuthService } from './services/auth.service';
 			path: 'profile/:name',
 			component: ProfileComponent,
 			children: [
-				{ path: 'edit', component: ProfileComponent}
+				{ path: '', component: AboutComponent },
+				{ path: 'activities', component: ActivityComponent },
+				{ path: 'edit', component: EditComponent },
+				{ path: 'pm', component: PmComponent }
 			]
 		  },
 		  { path: 'contact', component: ContactComponent},
@@ -81,7 +88,11 @@ import { AuthService } from './services/auth.service';
 		SideNavComponent,
 		ProfileComponent,
 		ShowArticleComponent,
-		BlogListComponent
+		BlogListComponent,
+		AboutComponent,
+		ActivityComponent,
+		EditComponent,
+		PmComponent
 	],
     providers: [ AuthService, SharedService ],
     exports: [ AppComponent ]

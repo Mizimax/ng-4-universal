@@ -1,6 +1,6 @@
 <div class="section">
     <div class="container">
-        <loading [height]="400" *ngIf="isLoading"></loading>
+        <loading [height]="400" [text]="'Loading Content...'" *ngIf="isLoading"></loading>
         <div class="myContainer" *ngIf="!isLoading">
             <div class="columns">
                 <div class="column is-three-quarters" style="margin-top:50px">

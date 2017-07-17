@@ -120,7 +120,7 @@ export class BlogComponent implements OnInit {
   }
 
   activeCategory(category): Boolean{
-    return this.category!==category
+    return this.category===category
   }
 
   ngOnDestroy() {

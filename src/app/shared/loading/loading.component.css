@@ -1,3 +1,6 @@
+.myLoading{
+    position:relative;
+}
 .loading{
     position:absolute;
     left:50%;
@@ -5,8 +8,8 @@
     transform: translate(-50%,-50%);
 }
 .loader{
-    height: 2em;
-    width: 2em;
+    height: 1.8em;
+    width: 1.8em;
     border: 2px solid orangered !important;
     border-right-color: transparent !important;
     border-top-color: transparent !important;

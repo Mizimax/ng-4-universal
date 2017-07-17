@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.cache.set('cached', true);
     this.router.events.subscribe((val:any) => {
-        if(typeof window !== 'undefined' && val.url.indexOf('category') === -1)
+        if(typeof window !== 'undefined' && val.url.indexOf('category') === -1 && val.url.indexOf('profile') === -1)
           window.scrollTo(0, 0)
     });
   }

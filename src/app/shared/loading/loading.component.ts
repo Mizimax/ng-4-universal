@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class LoadingComponent{
     @Input('height') height: string
     @Input('size') size: string
+    @Input('text') text: string
     constructor(){
     }
 }
